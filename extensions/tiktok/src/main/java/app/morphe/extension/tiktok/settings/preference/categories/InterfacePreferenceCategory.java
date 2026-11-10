@@ -630,7 +630,40 @@ public final class InterfacePreferenceCategory extends ConditionalPreferenceCate
             addPreference(new ChoicePreference(context, "Burn-in guard", Settings.BURN_IN_GUARD,
                     new String[]{"Off", "Dim when idle", "Dim when idle and shift"},
                     new String[]{BurnInGuard.OFF, BurnInGuard.DIM, BurnInGuard.DIM_AND_SHIFT})
-                    .withNote("For OLED screens. After 5 seconds without a touch, the buttons, caption and tabs over the video dim to a quarter, and your next touch brings them back. Shift also moves everything on the feed a few pixels every 2 minutes."));
+                    .withNote("For OLED screens. After 5 seconds without a touch, the buttons, caption and tabs over the video dim, and your next touch brings them back. Shift also moves everything on the feed a few pixels every 2 minutes."));
+            addPreference(new SliderInputPreference(
+                    context,
+                    "Burn-in guard dim level",
+                    "How bright the buttons, caption and tabs stay when the Burn-in guard dims them. Lower is darker. Drag the slider or type a number.",
+                    Settings.BURN_IN_DIM_LEVEL, "%1$s%%"));
+            addPreference(new TogglePreference(
+                    context,
+                    "Burn-in overlay",
+                    "Draws a dark rounded panel over the feed and opened videos, so the pixels under it stay dim on an OLED screen. Touches go through it. Set its size and look below.",
+                    Settings.BURN_IN_OVERLAY));
+            addPreference(new ChoicePreference(context, "Burn-in overlay position", Settings.BURN_IN_OVERLAY_POSITION,
+                    new String[]{"Top", "Center", "Bottom"},
+                    new String[]{"top", "center", "bottom"}));
+            addPreference(new SliderInputPreference(
+                    context,
+                    "Burn-in overlay rounding",
+                    "How round the overlay's corners are. 0 is square. Drag the slider or type a number.",
+                    Settings.BURN_IN_OVERLAY_ROUNDING, "%1$s dp"));
+            addPreference(new SliderInputPreference(
+                    context,
+                    "Burn-in overlay transparency",
+                    "How see-through the overlay is. 0 is solid black and 100 is invisible. Drag the slider or type a number.",
+                    Settings.BURN_IN_OVERLAY_TRANSPARENCY, "%1$s%%"));
+            addPreference(new SliderInputPreference(
+                    context,
+                    "Burn-in overlay width",
+                    "How wide the overlay is, as a percent of the screen width. Drag the slider or type a number.",
+                    Settings.BURN_IN_OVERLAY_WIDTH, "%1$s%%"));
+            addPreference(new SliderInputPreference(
+                    context,
+                    "Burn-in overlay length",
+                    "How long the overlay is, as a percent of the screen height. Drag the slider or type a number.",
+                    Settings.BURN_IN_OVERLAY_LENGTH, "%1$s%%"));
         }
     }
 

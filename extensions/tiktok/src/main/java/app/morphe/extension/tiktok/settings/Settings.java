@@ -844,11 +844,38 @@ public class Settings extends BaseSettings {
      */
     public static final BooleanSetting SEE_THROUGH_STATUS_BAR = new BooleanSetting("see_through_status_bar", FALSE);
     /**
-     * Burn-in guard for OLED screens (BurnInGuard): "dim" draws the controls the fade covers at a
-     * quarter after a few seconds without a touch, "dim_shift" also moves the window's content a
-     * couple of dp every two minutes. Over the feed and an opened video only.
+     * Burn-in guard for OLED screens (BurnInGuard): "dim" draws the controls the fade covers at
+     * BURN_IN_DIM_LEVEL after a few seconds without a touch, "dim_shift" also moves the window's
+     * content a couple of dp every two minutes. Over the feed and an opened video only.
      */
     public static final StringSetting BURN_IN_GUARD = new StringSetting("burn_in_guard", "off");
+    /**
+     * The opacity the idle dim takes the controls down to, as a percentage of what TikTok draws
+     * (BurnInGuard). Lower is darker. 1 to 99, so a dim is never the hide that 0 means for the
+     * fade and never the no-op that 100 is.
+     */
+    public static final IntegerSetting BURN_IN_DIM_LEVEL =
+            new IntegerSetting("burn_in_dim_level", 25).withRange(1, 99);
+    /**
+     * Draws a dark rounded panel over the feed and an opened video (BurnInOverlay), so the pixels
+     * under it stay unlit on an OLED screen. Touches go through it. The size, shape and place of
+     * the panel are the settings below, which only matter while this is on.
+     */
+    public static final BooleanSetting BURN_IN_OVERLAY = new BooleanSetting("burn_in_overlay", FALSE);
+    /** Where the overlay sits: "top", "center" or "bottom". */
+    public static final StringSetting BURN_IN_OVERLAY_POSITION = new StringSetting("burn_in_overlay_position", "bottom");
+    /** How round the overlay's corners are, in dp. 0 is square. */
+    public static final IntegerSetting BURN_IN_OVERLAY_ROUNDING =
+            new IntegerSetting("burn_in_overlay_rounding", 24, false, Setting.parent(BURN_IN_OVERLAY)).withRange(0, 200);
+    /** How see-through the overlay is, as a percentage: 0 is solid black and 100 is invisible. */
+    public static final IntegerSetting BURN_IN_OVERLAY_TRANSPARENCY =
+            new IntegerSetting("burn_in_overlay_transparency", 40, false, Setting.parent(BURN_IN_OVERLAY)).withRange(0, 100);
+    /** How wide the overlay is, as a percentage of the window's width. */
+    public static final IntegerSetting BURN_IN_OVERLAY_WIDTH =
+            new IntegerSetting("burn_in_overlay_width", 100, false, Setting.parent(BURN_IN_OVERLAY)).withRange(5, 100);
+    /** How long (tall) the overlay is, as a percentage of the window's height. */
+    public static final IntegerSetting BURN_IN_OVERLAY_LENGTH =
+            new IntegerSetting("burn_in_overlay_length", 12, false, Setting.parent(BURN_IN_OVERLAY)).withRange(1, 100);
     public static final BooleanSetting HIDE_SHARE_GUIDE = new BooleanSetting("hide_share_guide", FALSE);
     public static final BooleanSetting HIDE_RAIL_FOLLOW = new BooleanSetting("hide_rail_follow", FALSE);
     public static final BooleanSetting HIDE_RAIL_LIKE = new BooleanSetting("hide_rail_like", FALSE);
