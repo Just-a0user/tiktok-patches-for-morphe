@@ -1,7 +1,7 @@
 {
-  "created_at": "2026-11-10T20:29:01",
-  "description": "# [0.10.0](https://github.com/Just-a0user/tiktok-patches-for-morphe/compare/v0.9.0...v0.10.0) (2026-11-10)\n\n\n### Bug Fixes\n\n* import SliderInputPreference in the interface settings ([2efa4cb](https://github.com/Just-a0user/tiktok-patches-for-morphe/commit/2efa4cb0d422ad420aebdafa4c026a56d6c792f2))\n\n\n### Features\n\n* burn-in guard dim level slider and adjustable overlay ([75a8120](https://github.com/Just-a0user/tiktok-patches-for-morphe/commit/75a81203c8169df873bfa09a3a839342fee98b6a))\n\n\n\n\n\n## 0.10.0",
-  "download_url": "https://github.com/Just-a0user/tiktok-patches-for-morphe/releases/download/v0.10.0/patches-0.10.0.mpp",
+  "created_at": "2026-11-10T21:19:37",
+  "description": "# [0.11.0](https://github.com/Just-a0user/tiktok-patches-for-morphe/compare/v0.10.0...v0.11.0) (2026-11-10)\n\n\n### Features\n\n* OLED overlay editor replaces the burn-in guard ([f3f0daf](https://github.com/Just-a0user/tiktok-patches-for-morphe/commit/f3f0dafa93d6659390e7289ad66fb04743a300fa))\n\n\n\n\n\n## 0.11.0",
+  "download_url": "https://github.com/Just-a0user/tiktok-patches-for-morphe/releases/download/v0.11.0/patches-0.11.0.mpp",
   "signature_download_url": "",
-  "version": "0.10.0"
+  "version": "0.11.0"
 }

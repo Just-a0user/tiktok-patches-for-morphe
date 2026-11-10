@@ -1,3 +1,16 @@
+# [0.11.0](https://github.com/Just-a0user/tiktok-patches-for-morphe/compare/v0.10.0...v0.11.0) (2026-11-10)
+
+
+### Features
+
+* OLED overlay editor replaces the burn-in guard ([f3f0daf](https://github.com/Just-a0user/tiktok-patches-for-morphe/commit/f3f0dafa93d6659390e7289ad66fb04743a300fa))
+
+
+
+
+
+## 0.11.0
+
 # [0.10.0](https://github.com/Just-a0user/tiktok-patches-for-morphe/compare/v0.9.0...v0.10.0) (2026-11-10)
 
 
