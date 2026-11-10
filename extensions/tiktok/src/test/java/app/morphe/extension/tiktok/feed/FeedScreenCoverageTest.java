@@ -221,8 +221,8 @@ public class FeedScreenCoverageTest {
         put("floating_bottom_bar", YES, NONE, NONE);
         // The main feed only: an opened video keeps the strip under its own top bar (#145).
         put("see_through_status_bar", YES, NONE, NONE);
-        // The guard runs with the overlay pass, which walks both windows and no LIVE room.
-        put("burn_in_guard", YES, YES, NONE);
+        // The overlay editor draws over the main window and the detail pager, and no LIVE room.
+        put("action_edit_oled_overlays", YES, YES, NONE);
 
         // Gestures.
         put("swipe_levels", YES, YES, NONE);

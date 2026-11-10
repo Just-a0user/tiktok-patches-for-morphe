@@ -396,6 +396,40 @@ public final class FeedVisibility {
         return friends != null && friends.isShown() && !isScrolledAway(friends) && friends.isSelected();
     }
 
+    public static final int PAGE_UNKNOWN = 0;
+    public static final int PAGE_HOME = 1;
+    public static final int PAGE_PROFILE = 2;
+    public static final int PAGE_INBOX = 3;
+    public static final int PAGE_FRIENDS = 4;
+
+    /**
+     * Which page of the main window is on screen, by the bottom navigation's selected tab. An
+     * opened video (the detail pager or a post opened over the feed) counts as Home. Profile is
+     * any other selected tab while the bar is showing, which is Profile or Shop, and a creator's
+     * profile the feed scrolled sideways to. Unknown when no bar is showing (search, a sheet), and
+     * Home when this build doesn't expose the Home tab, the same bargain {@link #isOnFeed} makes.
+     */
+    public static int currentPage(Activity activity) {
+        if (isDetailPager(activity)) return PAGE_HOME;
+        View home = homeTab(activity);
+        if (home == null) return PAGE_HOME;
+        if (isFeedPageScrolledAway(activity)) return PAGE_PROFILE;
+        if (onRecommendationFeed(activity) || cleared(activity, home)) return PAGE_HOME;
+        View friends = tab(activity, "Friends", FRIENDS_TAB_RESOURCE_NAMES, friendsTabReference,
+                reference -> friendsTabReference = reference);
+        if (friends != null && friends.isShown() && !isScrolledAway(friends) && friends.isSelected()) {
+            return PAGE_FRIENDS;
+        }
+        View inbox = inboxTabView(activity);
+        if (inbox != null && inbox.isShown() && !isScrolledAway(inbox) && inbox.isSelected()) {
+            return PAGE_INBOX;
+        }
+        // Home selected but covered (a comment sheet, say) is still the Home page.
+        if (home.isSelected() && home.getVisibility() == View.VISIBLE) return PAGE_HOME;
+        if (home.isShown() && !isScrolledAway(home)) return PAGE_PROFILE;
+        return isDetailVisible() ? PAGE_HOME : PAGE_UNKNOWN;
+    }
+
     /**
      * The Home tab itself, for anything that has to draw around the navigation rather than
      * over it. Null when this build does not have the id, which is the same case

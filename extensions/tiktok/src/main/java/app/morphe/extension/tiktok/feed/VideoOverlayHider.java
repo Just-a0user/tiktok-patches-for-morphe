@@ -591,11 +591,11 @@ public final class VideoOverlayHider {
             // With the fade set, Clear display keeps the controls it covers in sight at that
             // level instead of taking them away, and lets taps through them (#84). Across a
             // carried swipe the incoming video's controls show the same way rather than going.
-            // Asked of the chosen level: the burn-in dim lowers what's drawn, never what Clear
-            // display does. With Keep faded controls in Clear display off, Clear display clears
+            // Asked of the chosen level. With Keep faded controls in Clear display off, Clear display clears
             // them as it does at 100 and the fade is left to the rest of the time.
             fadedClear = clearLive && chosenFade > 0 && chosenFade < 100 && Settings.FADE_IN_CLEAR_DISPLAY.get();
-            fadeLevel = BurnInGuard.pass(activity, chosenFade, overlaysOn);
+            fadeLevel = chosenFade;
+            OledOverlays.pass(activity, overlaysOn);
             boolean carryHides = carry && !fadedClear;
             topBarHeld = carryHides && !RememberClearDisplayPatch.isClearDisplayNow();
             boolean tabStrip = !detailPager && clearLive;

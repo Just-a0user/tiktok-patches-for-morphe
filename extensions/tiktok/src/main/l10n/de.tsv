@@ -2,11 +2,7 @@
 Adds Save cover next to Download when you share a video, so you save the cover only when you want it. While this is on, Download saves just the video, even with Save the cover as well on.	Fügt beim Teilen eines Videos „Titelbild speichern“ neben Herunterladen hinzu, damit du das Titelbild nur speicherst, wenn du es willst. Solange das an ist, speichert Herunterladen nur das Video, auch wenn Titelbild ebenfalls speichern an ist.
 Applies to Save the sound as well and to Save the original sound on a long press. Opus makes a smaller file, but the sound is encoded again from TikTok's copy.	Gilt für Ton ebenfalls speichern und für Originalsound speichern beim langen Drücken. Opus ergibt eine kleinere Datei, aber der Ton wird aus TikToks Kopie neu kodiert.
 As TikTok sent it (M4A or MP3)	So, wie TikTok ihn liefert (M4A oder MP3)
-Burn-in guard	Einbrennschutz
 Couldn't write the caption on this video. Saving it without.	Die Beschreibung konnte nicht ins Video geschrieben werden. Es wird ohne gespeichert.
-Dim when idle	Bei Inaktivität abdunkeln
-Dim when idle and shift	Bei Inaktivität abdunkeln und verschieben
-For OLED screens. After 5 seconds without a touch, the buttons, caption and tabs over the video dim to a quarter, and your next touch brings them back. Shift also moves everything on the feed a few pixels every 2 minutes.	Für OLED-Bildschirme. Nach 5 Sekunden ohne Berührung werden die Schaltflächen, die Beschreibung und die Tabs über dem Video auf ein Viertel abgedunkelt, und deine nächste Berührung holt sie zurück. Verschieben bewegt außerdem alles im Feed alle 2 Minuten um ein paar Pixel.
 Importing new history ended Undo for the earlier clear. You can clear the imported history.	Durch den Import ist das Rückgängigmachen des früheren Löschens beendet. Du kannst den importierten Verlauf löschen.
 %1$d setting in that file can't be restored here and was skipped	%1$d Einstellung in der Datei kann hier nicht wiederhergestellt werden und wurde übersprungen
 %1$d settings in that file can't be restored here and were skipped	%1$d Einstellungen in der Datei können hier nicht wiederhergestellt werden und wurden übersprungen
@@ -2208,20 +2204,29 @@ Promotions, overlays, profile and inbox controls	Promotions, overlays, profile a
 Filters, translation, copy options and split view	Filter, Übersetzung, Kopieroptionen und geteilte Ansicht
 Change the region TikTok reads	Change the region TikTok reads
 Playback, gestures, privacy, screen time and system	Playback, gestures, privacy, screen time and system
-For OLED screens. After 5 seconds without a touch, the buttons, caption and tabs over the video dim, and your next touch brings them back. Shift also moves everything on the feed a few pixels every 2 minutes.	Für OLED-Bildschirme. Nach 5 Sekunden ohne Berührung werden die Schaltflächen, die Beschreibung und die Tabs über dem Video abgedunkelt, und deine nächste Berührung holt sie zurück. Verschieben bewegt außerdem alles im Feed alle 2 Minuten um ein paar Pixel.
-Burn-in guard dim level	Einbrennschutz: Abdunkelungsstufe
 How bright the buttons, caption and tabs stay when the Burn-in guard dims them. Lower is darker. Drag the slider or type a number.	Wie hell die Schaltflächen, die Beschreibung und die Tabs bleiben, wenn der Einbrennschutz sie abdunkelt. Niedriger ist dunkler. Ziehe den Regler oder tippe eine Zahl ein.
-Burn-in overlay	Einbrennschutz-Overlay
 Draws a dark rounded panel over the feed and opened videos, so the pixels under it stay dim on an OLED screen. Touches go through it. Set its size and look below.	Zeichnet ein dunkles, abgerundetes Feld über den Feed und geöffnete Videos, damit die Pixel darunter auf einem OLED-Bildschirm dunkel bleiben. Berührungen gehen hindurch. Größe und Aussehen stellst du unten ein.
-Burn-in overlay position	Einbrennschutz-Overlay: Position
-Top	Oben
-Center	Mitte
-Bottom	Unten
-Burn-in overlay rounding	Einbrennschutz-Overlay: Rundung
 How round the overlay's corners are. 0 is square. Drag the slider or type a number.	Wie rund die Ecken des Overlays sind. 0 ist eckig. Ziehe den Regler oder tippe eine Zahl ein.
-Burn-in overlay transparency	Einbrennschutz-Overlay: Transparenz
 How see-through the overlay is. 0 is solid black and 100 is invisible. Drag the slider or type a number.	Wie durchsichtig das Overlay ist. 0 ist komplett schwarz und 100 ist unsichtbar. Ziehe den Regler oder tippe eine Zahl ein.
-Burn-in overlay width	Einbrennschutz-Overlay: Breite
 How wide the overlay is, as a percent of the screen width. Drag the slider or type a number.	Wie breit das Overlay ist, in Prozent der Bildschirmbreite. Ziehe den Regler oder tippe eine Zahl ein.
-Burn-in overlay length	Einbrennschutz-Overlay: Länge
 How long the overlay is, as a percent of the screen height. Drag the slider or type a number.	Wie lang das Overlay ist, in Prozent der Bildschirmhöhe. Ziehe den Regler oder tippe eine Zahl ein.
+Center outwards	Von der Mitte nach außen
+Create element	Element erstellen
+Dark panels over TikTok keep OLED pixels off. This opens an editor over the feed: add, move and resize panels, set rounding, opacity, a soft edge and a black to gray gradient, and choose the pages each panel shows on.	Dunkle Felder über TikTok halten OLED-Pixel aus. Das öffnet einen Editor über dem Feed: Felder hinzufügen, verschieben und in der Größe ändern, Rundung, Deckkraft, weichen Rand und einen Verlauf von Schwarz zu Grau einstellen und wählen, auf welchen Seiten jedes Feld erscheint.
+Delete	Löschen
+Discard	Verwerfen
+Edit OLED overlays	OLED-Overlays bearbeiten
+Element	Element
+Gradient	Verlauf
+Gray at the end of the gradient	Grau am Ende des Verlaufs
+Height	Höhe
+Left to right	Von links nach rechts
+Move panel	Fenster verschieben
+No elements yet	Noch keine Elemente
+Opacity	Deckkraft
+Right to left	Von rechts nach links
+Rounding	Rundung
+Show on these pages	Auf diesen Seiten anzeigen
+Soft edge	Weicher Rand
+Width	Breite
+You have changes that are not saved.	Du hast Änderungen, die nicht gespeichert sind.

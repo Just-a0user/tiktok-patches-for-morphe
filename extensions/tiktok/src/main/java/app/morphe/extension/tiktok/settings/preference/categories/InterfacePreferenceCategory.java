@@ -12,7 +12,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import app.morphe.extension.tiktok.captions.CaptionStyle;
-import app.morphe.extension.tiktok.feed.BurnInGuard;
 import app.morphe.extension.tiktok.feed.FeedTextSize;
 import app.morphe.extension.tiktok.interaction.TapConfirmation;
 import app.morphe.extension.tiktok.settings.L10n;
@@ -20,9 +19,9 @@ import app.morphe.extension.tiktok.settings.Settings;
 import app.morphe.extension.tiktok.settings.SettingsStatus;
 import app.morphe.extension.tiktok.settings.preference.ChoicePreference;
 import app.morphe.extension.tiktok.settings.preference.NumberInputPreference;
+import app.morphe.extension.tiktok.settings.preference.OledOverlayEditorPreference;
 import app.morphe.extension.tiktok.settings.preference.PopupLabelChecklistPreference;
 import app.morphe.extension.tiktok.settings.preference.SectionHeadingPreference;
-import app.morphe.extension.tiktok.settings.preference.SliderInputPreference;
 import app.morphe.extension.tiktok.settings.preference.SwitchListPreference;
 import app.morphe.extension.tiktok.settings.preference.TogglePreference;
 
@@ -628,43 +627,7 @@ public final class InterfacePreferenceCategory extends ConditionalPreferenceCate
                     "Let the video reach the top of the screen on the main feed, with the clock and status icons over it. The tabs at the top stay where they are.",
                     Settings.SEE_THROUGH_STATUS_BAR
             ));
-            addPreference(new ChoicePreference(context, "Burn-in guard", Settings.BURN_IN_GUARD,
-                    new String[]{"Off", "Dim when idle", "Dim when idle and shift"},
-                    new String[]{BurnInGuard.OFF, BurnInGuard.DIM, BurnInGuard.DIM_AND_SHIFT})
-                    .withNote("For OLED screens. After 5 seconds without a touch, the buttons, caption and tabs over the video dim, and your next touch brings them back. Shift also moves everything on the feed a few pixels every 2 minutes."));
-            addPreference(new SliderInputPreference(
-                    context,
-                    "Burn-in guard dim level",
-                    "How bright the buttons, caption and tabs stay when the Burn-in guard dims them. Lower is darker. Drag the slider or type a number.",
-                    Settings.BURN_IN_DIM_LEVEL, "%1$s%%"));
-            addPreference(new TogglePreference(
-                    context,
-                    "Burn-in overlay",
-                    "Draws a dark rounded panel over the feed and opened videos, so the pixels under it stay dim on an OLED screen. Touches go through it. Set its size and look below.",
-                    Settings.BURN_IN_OVERLAY));
-            addPreference(new ChoicePreference(context, "Burn-in overlay position", Settings.BURN_IN_OVERLAY_POSITION,
-                    new String[]{"Top", "Center", "Bottom"},
-                    new String[]{"top", "center", "bottom"}));
-            addPreference(new SliderInputPreference(
-                    context,
-                    "Burn-in overlay rounding",
-                    "How round the overlay's corners are. 0 is square. Drag the slider or type a number.",
-                    Settings.BURN_IN_OVERLAY_ROUNDING, "%1$s dp"));
-            addPreference(new SliderInputPreference(
-                    context,
-                    "Burn-in overlay transparency",
-                    "How see-through the overlay is. 0 is solid black and 100 is invisible. Drag the slider or type a number.",
-                    Settings.BURN_IN_OVERLAY_TRANSPARENCY, "%1$s%%"));
-            addPreference(new SliderInputPreference(
-                    context,
-                    "Burn-in overlay width",
-                    "How wide the overlay is, as a percent of the screen width. Drag the slider or type a number.",
-                    Settings.BURN_IN_OVERLAY_WIDTH, "%1$s%%"));
-            addPreference(new SliderInputPreference(
-                    context,
-                    "Burn-in overlay length",
-                    "How long the overlay is, as a percent of the screen height. Drag the slider or type a number.",
-                    Settings.BURN_IN_OVERLAY_LENGTH, "%1$s%%"));
+            addPreference(new OledOverlayEditorPreference(context));
         }
     }
 

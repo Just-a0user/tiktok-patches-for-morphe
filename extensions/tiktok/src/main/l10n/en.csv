@@ -302,7 +302,6 @@ Blocked sound names,Blocked sound names
 Blocked sounds,Blocked sounds
 Blocked words in commenter names,Blocked words in commenter names
 Blocking,Blocking
-Bottom,Bottom
 Bottom tabs to keep,Bottom tabs to keep
 Brightness,Brightness
 Bring back TikTok's translation,Bring back TikTok's translation
@@ -311,14 +310,6 @@ Browse,Browse
 Budgets and reminders,Budgets and reminders
 Build details,Build details
 Build details copied to the clipboard,Build details copied to the clipboard
-Burn-in guard,Burn-in guard
-Burn-in guard dim level,Burn-in guard dim level
-Burn-in overlay,Burn-in overlay
-Burn-in overlay length,Burn-in overlay length
-Burn-in overlay position,Burn-in overlay position
-Burn-in overlay rounding,Burn-in overlay rounding
-Burn-in overlay transparency,Burn-in overlay transparency
-Burn-in overlay width,Burn-in overlay width
 Buttons on videos,Buttons on videos
 Calm feed,Calm feed
 Calm feed couldn't be applied. Nothing was changed.,Calm feed couldn't be applied. Nothing was changed.
@@ -337,7 +328,7 @@ Captions,Captions
 "Captions, gestures and on-screen controls","Captions, gestures and on-screen controls"
 Capture crash reports locally,Capture crash reports locally
 Capture the feed,Capture the feed
-Center,Center
+Center outwards,Center outwards
 Change the region TikTok reads,Change the region TikTok reads
 Changed,Changed
 Changed %1$d settings,Changed %1$d settings
@@ -477,6 +468,7 @@ Country filters,Country filters
 Counts under the buttons,Counts under the buttons
 Cover saved to %1$s,Cover saved to %1$s
 Create,Create
+Create element,Create element
 Creator exceptions,Creator exceptions
 Creators and sounds,Creators and sounds
 Creators hidden on this phone,Creators hidden on this phone
@@ -497,10 +489,12 @@ Daily time budget,Daily time budget
 Daily video budget,Daily video budget
 Dark,Dark
 Dark Favorites popup,Dark Favorites popup
+"Dark panels over TikTok keep OLED pixels off. This opens an editor over the feed: add, move and resize panels, set rounding, opacity, a soft edge and a black to gray gradient, and choose the pages each panel shows on.","Dark panels over TikTok keep OLED pixels off. This opens an editor over the feed: add, move and resize panels, set rounding, opacity, a soft edge and a black to gray gradient, and choose the pages each panel shows on."
 Days to remember a video. Zero removes the age limit. History keeps at most %1$s videos.,Days to remember a video. Zero removes the age limit. History keeps at most %1$s videos.
 "Days. Zero keeps every age. Posts without a usable timestamp, including future posts, stay visible.","Days. Zero keeps every age. Posts without a usable timestamp, including future posts, stay visible."
 Default,Default
 Default playback speed,Default playback speed
+Delete,Delete
 Deletes %1$s from TikTok's storage.,Deletes %1$s from TikTok's storage.
 Delivery unconfirmed: %1$d/%2$d chats. Remaining chats still need a message.,Delivery unconfirmed: %1$d/%2$d chats. Remaining chats still need a message.
 Delivery unconfirmed: %1$d/%2$d chats. Those chats won't be retried today.,Delivery unconfirmed: %1$d/%2$d chats. Those chats won't be retried today.
@@ -513,10 +507,9 @@ Diagnostic data cleared. Tap again to put it back.,Diagnostic data cleared. Tap 
 Diagnostic data put back,Diagnostic data put back
 Diagnostic report copied to the clipboard,Diagnostic report copied to the clipboard
 Diagnostics,Diagnostics
-Dim when idle,Dim when idle
-Dim when idle and shift,Dim when idle and shift
 Disable,Disable
 Disabled,Disabled
+Discard,Discard
 Discard edits,Discard edits
 Dismissed %1$s suggested accounts,Dismissed %1$s suggested accounts
 Dismissed one suggested account,Dismissed one suggested account
@@ -543,6 +536,8 @@ Draw spoken captions at regular weight instead of TikTok's bold. Applies to the 
 Each area shows how many of the things Metra looks for were found in this TikTok and how many are missing.,Each area shows how many of the things Metra looks for were found in this TikTok and how many are missing.
 Easier comment likes,Easier comment likes
 Edge strip width,Edge strip width
+Edit OLED overlays,Edit OLED overlays
+Element,Element
 Empty,Empty
 "Empty the menu that opens when you press and hold TikTok's icon on the home screen. Turning this off asks TikTok to build them again. Tapping the icon still opens the app, and a shortcut you pinned yourself stays where you put it.","Empty the menu that opens when you press and hold TikTok's icon on the home screen. Turning this off asks TikTok to build them again. Tapping the icon still opens the app, and a shortcut you pinned yourself stays where you put it."
 Enable,Enable
@@ -621,8 +616,6 @@ Follow probe,Follow probe
 Followers,Followers
 Following,Following
 Follows you,Follows you
-"For OLED screens. After 5 seconds without a touch, the buttons, caption and tabs over the video dim to a quarter, and your next touch brings them back. Shift also moves everything on the feed a few pixels every 2 minutes.","For OLED screens. After 5 seconds without a touch, the buttons, caption and tabs over the video dim to a quarter, and your next touch brings them back. Shift also moves everything on the feed a few pixels every 2 minutes."
-"For OLED screens. After 5 seconds without a touch, the buttons, caption and tabs over the video dim, and your next touch brings them back. Shift also moves everything on the feed a few pixels every 2 minutes.","For OLED screens. After 5 seconds without a touch, the buttons, caption and tabs over the video dim, and your next touch brings them back. Shift also moves everything on the feed a few pixels every 2 minutes."
 For You,For You
 "For You, Following and the other feed tabs stay behind a calm panel and won't swipe. Messages, profiles and search work as usual, a link to one video still opens that video, and the app opens on Inbox instead of the feed.","For You, Following and the other feed tabs stay behind a calm panel and won't swipe. Messages, profiles and search work as usual, a link to one video still opens that video, and the app opens on Inbox instead of the feed."
 "For accounts TikTok took translation away from. Brings back See translation under video descriptions and in captions, and the translation rows on the Language page in Settings and privacy. Restart TikTok to see it on videos.","For accounts TikTok took translation away from. Brings back See translation under video descriptions and in captions, and the translation rows on the Language page in Settings and privacy. Restart TikTok to see it on videos."
@@ -666,10 +659,13 @@ Ghost mode diagnostics,Ghost mode diagnostics
 "Give each commenter's name a color of its own, the same one every time you see that account, so a long thread is easier to follow.","Give each commenter's name a color of its own, the same one every time you see that account, so a long thread is easier to follow."
 Go to the screen now. Metra records its layout in %1$d seconds.,Go to the screen now. Metra records its layout in %1$d seconds.
 Got it,Got it
+Gradient,Gradient
+Gray at the end of the gradient,Gray at the end of the gradient
 "HDR videos light the screen extra bright. This plays the standard (SDR) version instead, so the screen doesn't jump to full brightness. Videos with no standard version still play in HDR.","HDR videos light the screen extra bright. This plays the standard (SDR) version instead, so the screen doesn't jump to full brightness. Videos with no standard version still play in HDR."
 HTTP,HTTP
 Hand-off,Hand-off
 Handle or id,Handle or id
+Height,Height
 Hidden %1$s on this phone,Hidden %1$s on this phone
 Hidden LIVE categories,Hidden LIVE categories
 Hidden commenters,Hidden commenters
@@ -959,6 +955,7 @@ Leave maximum empty to keep it unlimited.,Leave maximum empty to keep it unlimit
 Leave the sound out of the saved video. Save the sound as well still writes the sound file beside it if you want both.,Leave the sound out of the saved video. Save the sound as well still writes the sound file beside it if you want both.
 Leave when TikTok says time is up,Leave when TikTok says time is up
 Left edge strip,Left edge strip
+Left to right,Left to right
 Length and views per like,Length and views per like
 Less than a minute left,Less than a minute left
 Let a LIVE fill the screen up to the top edge. The status bar comes back when you leave the LIVE. Swipe down from the top to peek at it.,Let a LIVE fill the screen up to the top edge. The status bar comes back when you leave the LIVE. Swipe down from the top to peek at it.
@@ -1061,6 +1058,7 @@ More options,More options
 "More than %1$d comments were loaded, so the rest aren't in the file.","More than %1$d comments were loaded, so the rest aren't in the file."
 Move down,Move down
 Move left,Move left
+Move panel,Move panel
 Move right,Move right
 "Move to the next video when the current one ends. Pauses, open dialogs and screen-time holds stop it. Restart TikTok to apply this.","Move to the next video when the current one ends. Pauses, open dialogs and screen-time holds stop it. Restart TikTok to apply this."
 Move up,Move up
@@ -1088,6 +1086,7 @@ No creator to hide on this video,No creator to hide on this video
 No current value,No current value
 No current value and no active override,No current value and no active override
 No delay,No delay
+No elements yet,No elements yet
 No font is imported,No font is imported
 No gate data is available. Refresh values from the menu to try again.,No gate data is available. Refresh values from the menu to try again.
 No gate reads were recorded. Use a TikTok feature while recording.,No gate reads were recorded. Use a TikTok feature while recording.
@@ -1176,6 +1175,7 @@ Only on the sides of the video,Only on the sides of the video
 Only tabs TikTok has loaded on this device are shown here. This doesn't force unavailable tabs to appear.,Only tabs TikTok has loaded on this device are shown here. This doesn't force unavailable tabs to appear.
 Only the first %1$s characters of the sample were checked.,Only the first %1$s characters of the sample were checked.
 Only these caption languages,Only these caption languages
+Opacity,Opacity
 Open,Open
 Open Metra settings,Open Metra settings
 Open TikTok on,Open TikTok on
@@ -1403,6 +1403,8 @@ Reviewed presets for TikTok %1$s,Reviewed presets for TikTok %1$s
 Right away,Right away
 Right column,Right column
 Right edge strip,Right edge strip
+Right to left,Right to left
+Rounding,Rounding
 Rows,Rows
 "Run the progress bar from one screen edge to the other, without the gap TikTok leaves at each end.","Run the progress bar from one screen edge to the other, without the gap TikTok leaves at each end."
 SIM country preset,SIM country preset
@@ -1596,6 +1598,7 @@ Show how long each video runs under its view count on profile grids. Photo posts
 Show how many were filtered,Show how many were filtered
 Show last report,Show last report
 "Show likes, comments, shares and saves as a percentage of views, next to the creator's name and after the view count on profile grids.","Show likes, comments, shares and saves as a percentage of views, next to the creator's name and after the view count on profile grids."
+Show on these pages,Show on these pages
 Show only LIVEs from creators with this many followers.,Show only LIVEs from creators with this many followers.
 Show only LIVEs with this many people watching.,Show only LIVEs with this many people watching.
 Show only mutual friends on the Friends tab,Show only mutual friends on the Friends tab
@@ -1659,6 +1662,7 @@ Skip update checks,Skip update checks
 "Skipped entries are invalid, expired, already recorded, or older than the newest %1$s videos.","Skipped entries are invalid, expired, already recorded, or older than the newest %1$s videos."
 Skipping videos with %1$s,Skipping videos with %1$s
 Sleep timer off,Sleep timer off
+Soft edge,Soft edge
 Some Calm feed settings changed. Restore still puts back your earlier setup.,Some Calm feed settings changed. Restore still puts back your earlier setup.
 Some of these notes are in English.,Some of these notes are in English.
 Something is missing from %1$s. Tap for the whole report.,Something is missing from %1$s. Tap for the whole report.
@@ -2011,7 +2015,6 @@ Today: %1$d video,Today: %1$d video
 Today: %1$d videos,Today: %1$d videos
 Too late to put the saved videos back,Too late to put the saved videos back
 Too many media saves are already running. Try again in a moment.,Too many media saves are already running. Try again in a moment.
-Top,Top
 Tracking,Tracking
 "Tracking, device access and links","Tracking, device access and links"
 Translate button in comments,Translate button in comments
@@ -2150,6 +2153,7 @@ When to send,When to send
 "While Clear display is on, also hide the progress bar, the close button and the pause and speed buttons at the bottom. You can still drag along the bottom edge to move through the video. To leave Clear display, press and hold the video and tap Restore display, or pinch the screen.","While Clear display is on, also hide the progress bar, the close button and the pause and speed buttons at the bottom. You can still drag along the bottom edge to move through the video. To leave Clear display, press and hold the video and tap Restore display, or pinch the screen."
 "While diagnostic logging is on, a message names the part of Metra that failed. Off keeps failures in the report only.","While diagnostic logging is on, a message names the part of Metra that failed. Off keeps failures in the report only."
 Who to message,Who to message
+Width,Width
 Window width needed to enable the layout. Restart TikTok to apply this.,Window width needed to enable the layout. Restart TikTok to apply this.
 "Wipe TikTok's data and give it a new Android ID and advertising ID on the next start, so it sees a phone it hasn't met. You'll be signed out and lose your drafts. Metra's settings stay.","Wipe TikTok's data and give it a new Android ID and advertising ID on the next start, so it sees a phone it hasn't met. You'll be signed out and lose your drafts. Metra's settings stay."
 "With the fade below 100, the buttons and caption stay on screen at that level in Clear display, and taps go through them to the video. Off, Clear display hides them the way it does at 100.","With the fade below 100, the buttons and caption stay on screen at that level in Clear display, and taps go through them to the video. Off, Clear display hides them the way it does at 100."
@@ -2168,6 +2172,7 @@ YTDLnis background mode,YTDLnis background mode
 YTDLnis download type,YTDLnis download type
 Yes,Yes
 You can pick up to %1$s at a time,You can pick up to %1$s at a time
+You have changes that are not saved.,You have changes that are not saved.
 YouTube Music couldn't be opened. Open it yourself and search for the sound.,YouTube Music couldn't be opened. Open it yourself and search for the sound.
 YouTube Music isn't installed,YouTube Music isn't installed
 Your Long press choice runs only on the left and right thirds of the video. A press in the middle still opens TikTok's own menu. It needs a Long press choice other than TikTok default.,Your Long press choice runs only on the left and right thirds of the video. A press in the middle still opens TikTok's own menu. It needs a Long press choice other than TikTok default.
