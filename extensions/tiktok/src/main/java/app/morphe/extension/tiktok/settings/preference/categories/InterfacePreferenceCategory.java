@@ -22,6 +22,7 @@ import app.morphe.extension.tiktok.settings.preference.ChoicePreference;
 import app.morphe.extension.tiktok.settings.preference.NumberInputPreference;
 import app.morphe.extension.tiktok.settings.preference.PopupLabelChecklistPreference;
 import app.morphe.extension.tiktok.settings.preference.SectionHeadingPreference;
+import app.morphe.extension.tiktok.settings.preference.SliderInputPreference;
 import app.morphe.extension.tiktok.settings.preference.SwitchListPreference;
 import app.morphe.extension.tiktok.settings.preference.TogglePreference;
 
