@@ -1,3 +1,21 @@
+# [0.10.0](https://github.com/Just-a0user/tiktok-patches-for-morphe/compare/v0.9.0...v0.10.0) (2026-11-10)
+
+
+### Bug Fixes
+
+* import SliderInputPreference in the interface settings ([2efa4cb](https://github.com/Just-a0user/tiktok-patches-for-morphe/commit/2efa4cb0d422ad420aebdafa4c026a56d6c792f2))
+
+
+### Features
+
+* burn-in guard dim level slider and adjustable overlay ([75a8120](https://github.com/Just-a0user/tiktok-patches-for-morphe/commit/75a81203c8169df873bfa09a3a839342fee98b6a))
+
+
+
+
+
+## 0.10.0
+
 # [0.9.0](https://github.com/icysymmetra/tiktok-patches-for-morphe/compare/v0.8.1...v0.9.0) (2026-11-10)
 
 
