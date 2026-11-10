@@ -29,8 +29,8 @@ import java.util.WeakHashMap;
  *
  * <p>The dim is the overlay pass's own fade at a lower level. Once the screen has gone
  * {@link #IDLE_AFTER_MS} without a touch, the buttons, caption, music disc, search bar and tabs
- * the fade covers are drawn at {@link #IDLE_LEVEL} (or at the chosen fade, if that's lower), and
- * the next finger brings them back. It only lowers what's drawn: Clear display, and whether a
+ * the fade covers are drawn at the Dim level setting, {@link #IDLE_LEVEL} unless it was moved (or
+ * at the chosen fade, if that's lower), and the next finger brings them back. It only lowers what's drawn: Clear display, and whether a
  * faded control lets taps through, still follow Fade the video controls alone, so a dim never
  * brings back a control Clear display took away.
  *
@@ -50,7 +50,10 @@ public final class BurnInGuard {
 
     /** How long the screen goes untouched before the controls dim. */
     static final long IDLE_AFTER_MS = 5_000L;
-    /** The opacity the controls dim to, as a percentage of what TikTok draws. */
+    /**
+     * The opacity the controls dim to when nothing else is chosen, as a percentage of what TikTok
+     * draws. Dim level in the settings moves it; this is that setting's default.
+     */
     static final int IDLE_LEVEL = 25;
     /** How long the content stays in one place. */
     static final long SHIFT_EVERY_MS = 120_000L;
@@ -89,6 +92,11 @@ public final class BurnInGuard {
         return DIM.equals(value) || DIM_AND_SHIFT.equals(value) ? value : OFF;
     }
 
+    /** The opacity the controls dim to, kept inside the 1 to 99 the setting allows. */
+    static int dimLevel() {
+        return Math.max(1, Math.min(99, Settings.BURN_IN_DIM_LEVEL.get()));
+    }
+
     /**
      * Runs with every overlay pass. Answers the level the fade draws the controls at this pass,
      * {@code chosen} unless the screen has gone untouched, moves the content or puts it back, and
@@ -97,8 +105,11 @@ public final class BurnInGuard {
      */
     static int pass(Activity activity, int chosen, boolean allowed) {
         String mode = allowed ? mode() : OFF;
-        boolean on = !OFF.equals(mode)
+        boolean inFeed = allowed
                 && (FeedVisibility.isDetailPager(activity) || FeedVisibility.isOnFeed(activity));
+        boolean on = !OFF.equals(mode) && inFeed;
+        // The overlay has a switch of its own: it doesn't wait for the guard to be on.
+        BurnInOverlay.update(activity, inFeed && Settings.BURN_IN_OVERLAY.get());
         long now = SystemClock.uptimeMillis();
         if (on) {
             watch(activity);
@@ -114,14 +125,15 @@ public final class BurnInGuard {
             fingerDown = false;
         }
         guarding = on;
-        boolean canDim = on && chosen > IDLE_LEVEL;
+        int level = dimLevel();
+        boolean canDim = on && chosen > level;
         dimmed = canDim && !fingerDown && now - touchedAt >= IDLE_AFTER_MS;
         boolean shifting = on && DIM_AND_SHIFT.equals(mode);
         place(activity, shifting, now);
         // No dim is timed while a finger is down; its lift asks for the pass that times one.
         schedule(Math.min(canDim && !dimmed && !fingerDown ? touchedAt + IDLE_AFTER_MS : Long.MAX_VALUE,
                 shifting ? (now / SHIFT_EVERY_MS + 1) * SHIFT_EVERY_MS : Long.MAX_VALUE));
-        return dimmed ? IDLE_LEVEL : chosen;
+        return dimmed ? level : chosen;
     }
 
     /** The place the content is in at {@code now}, in steps of {@link #STEP_DP}. */

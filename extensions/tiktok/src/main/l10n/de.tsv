@@ -2208,3 +2208,20 @@ Promotions, overlays, profile and inbox controls	Promotions, overlays, profile a
 Filters, translation, copy options and split view	Filter, Übersetzung, Kopieroptionen und geteilte Ansicht
 Change the region TikTok reads	Change the region TikTok reads
 Playback, gestures, privacy, screen time and system	Playback, gestures, privacy, screen time and system
+For OLED screens. After 5 seconds without a touch, the buttons, caption and tabs over the video dim, and your next touch brings them back. Shift also moves everything on the feed a few pixels every 2 minutes.	Für OLED-Bildschirme. Nach 5 Sekunden ohne Berührung werden die Schaltflächen, die Beschreibung und die Tabs über dem Video abgedunkelt, und deine nächste Berührung holt sie zurück. Verschieben bewegt außerdem alles im Feed alle 2 Minuten um ein paar Pixel.
+Burn-in guard dim level	Einbrennschutz: Abdunkelungsstufe
+How bright the buttons, caption and tabs stay when the Burn-in guard dims them. Lower is darker. Drag the slider or type a number.	Wie hell die Schaltflächen, die Beschreibung und die Tabs bleiben, wenn der Einbrennschutz sie abdunkelt. Niedriger ist dunkler. Ziehe den Regler oder tippe eine Zahl ein.
+Burn-in overlay	Einbrennschutz-Overlay
+Draws a dark rounded panel over the feed and opened videos, so the pixels under it stay dim on an OLED screen. Touches go through it. Set its size and look below.	Zeichnet ein dunkles, abgerundetes Feld über den Feed und geöffnete Videos, damit die Pixel darunter auf einem OLED-Bildschirm dunkel bleiben. Berührungen gehen hindurch. Größe und Aussehen stellst du unten ein.
+Burn-in overlay position	Einbrennschutz-Overlay: Position
+Top	Oben
+Center	Mitte
+Bottom	Unten
+Burn-in overlay rounding	Einbrennschutz-Overlay: Rundung
+How round the overlay's corners are. 0 is square. Drag the slider or type a number.	Wie rund die Ecken des Overlays sind. 0 ist eckig. Ziehe den Regler oder tippe eine Zahl ein.
+Burn-in overlay transparency	Einbrennschutz-Overlay: Transparenz
+How see-through the overlay is. 0 is solid black and 100 is invisible. Drag the slider or type a number.	Wie durchsichtig das Overlay ist. 0 ist komplett schwarz und 100 ist unsichtbar. Ziehe den Regler oder tippe eine Zahl ein.
+Burn-in overlay width	Einbrennschutz-Overlay: Breite
+How wide the overlay is, as a percent of the screen width. Drag the slider or type a number.	Wie breit das Overlay ist, in Prozent der Bildschirmbreite. Ziehe den Regler oder tippe eine Zahl ein.
+Burn-in overlay length	Einbrennschutz-Overlay: Länge
+How long the overlay is, as a percent of the screen height. Drag the slider or type a number.	Wie lang das Overlay ist, in Prozent der Bildschirmhöhe. Ziehe den Regler oder tippe eine Zahl ein.
