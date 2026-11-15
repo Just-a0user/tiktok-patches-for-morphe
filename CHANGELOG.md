@@ -1,3 +1,16 @@
+# [0.12.0](https://github.com/Just-a0user/tiktok-patches-for-morphe/compare/v0.11.0...v0.12.0) (2026-11-15)
+
+
+### Features
+
+* OLED element dimming, presets, picture picker, video edges, new overlay editor ([891a622](https://github.com/Just-a0user/tiktok-patches-for-morphe/commit/891a622b77f5cfd45e19d35888000edfa225ac17))
+
+
+
+
+
+## 0.12.0
+
 # [0.11.0](https://github.com/Just-a0user/tiktok-patches-for-morphe/compare/v0.10.0...v0.11.0) (2026-11-10)
 
 
