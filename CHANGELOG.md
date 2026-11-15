@@ -1,3 +1,16 @@
+## [0.13.1](https://github.com/Just-a0user/tiktok-patches-for-morphe/compare/v0.13.0...v0.13.1) (2026-11-15)
+
+
+### Bug Fixes
+
+* document the editable video edge settings so the release can publish ([b76b75c](https://github.com/Just-a0user/tiktok-patches-for-morphe/commit/b76b75c46cfd68639f6a8e5c76895bb4a32e3f65))
+
+
+
+
+
+## 0.13.1
+
 # [0.13.0](https://github.com/Just-a0user/tiktok-patches-for-morphe/compare/v0.12.0...v0.13.0) (2026-11-15)
 
 
