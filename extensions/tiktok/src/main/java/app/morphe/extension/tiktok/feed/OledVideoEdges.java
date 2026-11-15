@@ -25,6 +25,7 @@ import java.util.WeakHashMap;
  *
  * <p>The fade is drawn as the foreground of the video's own view, not as a panel over the screen:
  * it is part of the video and moves with it. TikTok does not let the picture itself be masked.
+ * Length, strength, curve and colour of each edge are set in the editor's Edges tab.
  */
 final class OledVideoEdges {
     private static final String[] PLAYER_VIEW = {"player_view"};
