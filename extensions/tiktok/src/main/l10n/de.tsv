@@ -2230,3 +2230,71 @@ Show on these pages	Auf diesen Seiten anzeigen
 Soft edge	Weicher Rand
 Width	Breite
 You have changes that are not saved.	Du hast Änderungen, die nicht gespeichert sind.
+A preset is a panel that follows the real element. It opens over the feed first, where you can change it before saving.	Ein Preset ist ein Feld, das dem echten Element folgt. Es öffnet sich zuerst über dem Feed, dort kannst du es ändern, bevor du speicherst.
+Bottom bar	Untere Leiste
+Bottom bar, all together	Untere Leiste, alles zusammen
+Bottom edge	Unterer Rand
+Bottom left	Unten links
+Caption and hashtags	Beschreibung und Hashtags
+Comment count	Kommentar-Anzahl
+Comment icon	Kommentar-Symbol
+Creator avatar	Profilbild des Creators
+Date	Datum
+Dim single elements	Einzelne Elemente abdunkeln
+Dim single elements of the feed screen, ready-made panels, a picture to tap an element in, and soft edges for the video.	Einzelne Elemente des Feeds abdunkeln, fertige Felder, ein Bild zum Antippen eines Elements und weiche Ränder für das Video.
+Dim this element	Dieses Element abdunkeln
+Everything	Alles
+Follows	Folgt
+Friends icon	Freund*innen-Symbol
+Friends label	Freund*innen-Beschriftung
+Gray at the end	Grau am Ende
+Home icon	Home-Symbol
+Home label	Home-Beschriftung
+Inbox icon	Posteingang-Symbol
+Inbox label	Posteingang-Beschriftung
+LIVE button	LIVE-Schaltfläche
+Like count	Like-Anzahl
+Like icon	Like-Symbol
+Moving the gray turns the gradient on. It runs as an animation; 0 seconds keeps it still.	Wenn du das Grau verschiebst, schaltet sich der Verlauf ein. Er läuft als Animation; bei 0 Sekunden steht er still.
+New	Neu
+No elements yet. Tap New to add one.	Noch keine Elemente. Tippe auf Neu, um eins hinzuzufügen.
+Not found on the last look at the screen. It may not be on screen, or this version names it differently.	Beim letzten Blick auf den Bildschirm nicht gefunden. Es ist vielleicht nicht zu sehen oder heißt in dieser Version anders.
+OLED overlays	OLED-Overlays
+OLED screen elements	OLED-Bildschirmelemente
+Packages	Pakete
+Padding	Abstand
+Pages	Seiten
+Pick an element in the picture	Element im Bild auswählen
+Plus button	Plus-Taste
+Presets	Presets
+Profile icon	Profil-Symbol
+Profile label	Profil-Beschriftung
+Progress bar	Fortschrittsbalken
+Right bar	Rechte Leiste
+Right bar, all together	Rechte Leiste, alles zusammen
+Save count	Speichern-Anzahl
+Save icon	Speichern-Symbol
+Search icon	Suchsymbol
+Seconds per round	Sekunden pro Durchlauf
+Shape	Form
+Share count	Teilen-Anzahl
+Share icon	Teilen-Symbol
+Sharp edge	Harter Rand
+Soft edges of the video	Weiche Ränder des Videos
+Song line	Songzeile
+Stop following	Nicht mehr folgen
+Tab 1, the rightmost (usually For you)	Tab 1, ganz rechts (meist Für dich)
+Tab 2	Tab 2
+Tab 3	Tab 3
+Tab 4	Tab 4
+Tab 5	Tab 5
+Tabs, all together	Tabs, alle zusammen
+Tap an element	Tippe auf ein Element
+Text block, all together	Textblock, alles zusammen
+Text bottom left	Text unten links
+The video fades to black at its top and bottom edge. This is drawn on the video itself, not as a panel, and only in the feed.	Das Video blendet am oberen und unteren Rand zu Schwarz aus. Das wird auf das Video selbst gezeichnet, nicht als Feld, und nur im Feed.
+Top bar	Obere Leiste
+Top edge	Oberer Rand
+Transparency (100 = invisible)	Transparenz (100 = unsichtbar)
+Username	Benutzername
+not found	nicht gefunden

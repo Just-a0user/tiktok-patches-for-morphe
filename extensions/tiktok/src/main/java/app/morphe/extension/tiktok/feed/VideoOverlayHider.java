@@ -595,6 +595,8 @@ public final class VideoOverlayHider {
             // them as it does at 100 and the fade is left to the rest of the time.
             fadedClear = clearLive && chosenFade > 0 && chosenFade < 100 && Settings.FADE_IN_CLEAR_DISPLAY.get();
             fadeLevel = chosenFade;
+            OledElementDimmer.pass(activity, overlaysOn);
+            OledVideoEdges.pass(activity, overlaysOn);
             OledOverlays.pass(activity, overlaysOn);
             boolean carryHides = carry && !fadedClear;
             topBarHeld = carryHides && !RememberClearDisplayPatch.isClearDisplayNow();
@@ -2049,6 +2051,24 @@ public final class VideoOverlayHider {
         return null;
     }
 
+    /** Applies the fade this view already holds again, so a dim set on it since takes effect. */
+    static void refade(View view) {
+        float[] held = FADED_TO.get(view);
+        setFaded(view, held == null ? 100 : Math.round(held[2] * 100f), held != null && held[4] != 0f);
+    }
+
+    /** Every view of the window carrying one of the named ids, in tree order, for the OLED elements. */
+    static List<View> viewsNamed(Activity activity, String[] names) {
+        List<View> result = new ArrayList<>();
+        if (activity == null || activity.getWindow() == null) return result;
+        View root = activity.getWindow().getDecorView();
+        for (String name : names) {
+            int id = resolveIdentifier(activity, activity.getPackageName(), name, false);
+            if (id != 0) result.addAll(viewsWithId(root, id));
+        }
+        return result;
+    }
+
     /** Every descendant of {@code root} carrying {@code id}, in tree order. */
     static List<View> viewsWithId(View root, int id) {
         return viewsWithIds(root, new int[]{id}).get(0);
@@ -2303,6 +2323,9 @@ public final class VideoOverlayHider {
         if (view == null) {
             return;
         }
+        // An element the reader dimmed in the OLED settings keeps at most that opacity, so a fade
+        // set here and a dim set there never undo each other: the stronger one wins.
+        percent = Math.min(percent, OledElementDimmer.opacityOf(view));
         float[] held = FADED_TO.get(view);
         if (percent >= 100) {
             if (held != null) {

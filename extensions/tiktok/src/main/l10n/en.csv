@@ -143,6 +143,7 @@ A long press on a video you opened from search opens the same menu as on For You
 A message is already on its way,A message is already on its way
 A name of your own under this tab's icon. Leave it empty to keep TikTok's.,A name of your own under this tab's icon. Leave it empty to keep TikTok's.
 A port is a whole number from 1 to 65535,A port is a whole number from 1 to 65535
+"A preset is a panel that follows the real element. It opens over the feed first, where you can change it before saving.","A preset is a panel that follows the real element. It opens over the feed first, where you can change it before saving."
 A press on Share under a video copies its link instead of opening the share sheet. Press Share again right after to open the sheet.,A press on Share under a video copies its link instead of opening the share sheet. Press Share again right after to open the sheet.
 "A profile's share sheet gets an Account facts button. It shows what TikTok already sent about the account: when it joined, its region and language, when its username and display name last changed, whether it's private and whether its liked videos are public. Nothing extra is fetched.","A profile's share sheet gets an Account facts button. It shows what TikTok already sent about the account: when it joined, its region and language, when its username and display name last changed, whether it's private and whether its liked videos are public. Nothing extra is fetched."
 "A screen's layout is recorded. Export the diagnostic report to send it, or tap to record another.","A screen's layout is recorded. Export the diagnostic report to send it, or tap to record another."
@@ -302,6 +303,10 @@ Blocked sound names,Blocked sound names
 Blocked sounds,Blocked sounds
 Blocked words in commenter names,Blocked words in commenter names
 Blocking,Blocking
+Bottom bar,Bottom bar
+"Bottom bar, all together","Bottom bar, all together"
+Bottom edge,Bottom edge
+Bottom left,Bottom left
 Bottom tabs to keep,Bottom tabs to keep
 Brightness,Brightness
 Bring back TikTok's translation,Bring back TikTok's translation
@@ -321,6 +326,7 @@ Camera in use,Camera in use
 Can't check yet: %1$s,Can't check yet: %1$s
 Cancel,Cancel
 Caption above comments,Caption above comments
+Caption and hashtags,Caption and hashtags
 Caption background,Caption background
 Caption languages,Caption languages
 Caption text size,Caption text size
@@ -372,7 +378,9 @@ Color commenter names,Color commenter names
 "Comma separated names exactly as the row under a profile's bio shows them, such as TikTok Studio or Your orders. Restart TikTok to apply this.","Comma separated names exactly as the row under a profile's bio shows them, such as TikTok Studio or Your orders. Restart TikTok to apply this."
 Comma-separated action IDs. Other video actions remain available.,Comma-separated action IDs. Other video actions remain available.
 Comma-separated share option IDs. Other sharing apps remain available.,Comma-separated share option IDs. Other sharing apps remain available.
+Comment count,Comment count
 Comment export failed,Comment export failed
+Comment icon,Comment icon
 Comment media filename,Comment media filename
 Comment sort and dislike styles,Comment sort and dislike styles
 "Comment with live photos, the camera or audio","Comment with live photos, the camera or audio"
@@ -469,6 +477,7 @@ Counts under the buttons,Counts under the buttons
 Cover saved to %1$s,Cover saved to %1$s
 Create,Create
 Create element,Create element
+Creator avatar,Creator avatar
 Creator exceptions,Creator exceptions
 Creators and sounds,Creators and sounds
 Creators hidden on this phone,Creators hidden on this phone
@@ -490,6 +499,7 @@ Daily video budget,Daily video budget
 Dark,Dark
 Dark Favorites popup,Dark Favorites popup
 "Dark panels over TikTok keep OLED pixels off. This opens an editor over the feed: add, move and resize panels, set rounding, opacity, a soft edge and a black to gray gradient, and choose the pages each panel shows on.","Dark panels over TikTok keep OLED pixels off. This opens an editor over the feed: add, move and resize panels, set rounding, opacity, a soft edge and a black to gray gradient, and choose the pages each panel shows on."
+Date,Date
 Days to remember a video. Zero removes the age limit. History keeps at most %1$s videos.,Days to remember a video. Zero removes the age limit. History keeps at most %1$s videos.
 "Days. Zero keeps every age. Posts without a usable timestamp, including future posts, stay visible.","Days. Zero keeps every age. Posts without a usable timestamp, including future posts, stay visible."
 Default,Default
@@ -507,6 +517,9 @@ Diagnostic data cleared. Tap again to put it back.,Diagnostic data cleared. Tap 
 Diagnostic data put back,Diagnostic data put back
 Diagnostic report copied to the clipboard,Diagnostic report copied to the clipboard
 Diagnostics,Diagnostics
+Dim single elements,Dim single elements
+"Dim single elements of the feed screen, ready-made panels, a picture to tap an element in, and soft edges for the video.","Dim single elements of the feed screen, ready-made panels, a picture to tap an element in, and soft edges for the video."
+Dim this element,Dim this element
 Disable,Disable
 Disabled,Disabled
 Discard,Discard
@@ -559,6 +572,7 @@ Enter who to message below to start.,Enter who to message below to start.
 Entry %1$d has a field with the wrong data type.,Entry %1$d has a field with the wrong data type.
 Entry %1$d isn't an object.,Entry %1$d isn't an object.
 Errors,Errors
+Everything,Everything
 Everything this list has loaded is picked or saved. Scroll down to load more.,Everything this list has loaded is picked or saved. Scroll down to load more.
 Expand activity list,Expand activity list
 Explore or Community,Explore or Community
@@ -615,6 +629,7 @@ Focus,Focus
 Follow probe,Follow probe
 Followers,Followers
 Following,Following
+Follows,Follows
 Follows you,Follows you
 For You,For You
 "For You, Following and the other feed tabs stay behind a calm panel and won't swipe. Messages, profiles and search work as usual, a link to one video still opens that video, and the app opens on Inbox instead of the feed.","For You, Following and the other feed tabs stay behind a calm panel and won't swipe. Messages, profiles and search work as usual, a link to one video still opens that video, and the app opens on Inbox instead of the feed."
@@ -638,6 +653,8 @@ Forgotten. Tap to put them back.,Forgotten. Tap to put them back.
 Found %1$s in your chats.,Found %1$s in your chats.
 Frame saved to %1$s,Frame saved to %1$s
 Friends,Friends
+Friends icon,Friends icon
+Friends label,Friends label
 Friends tab name,Friends tab name
 "Friends won't see a green dot or Active now while you're in TikTok. Needs Ghost mode on. Their status may stop updating for you, and your last status can linger.","Friends won't see a green dot or Active now while you're in TikTok. Needs Ghost mode on. Their status may stop updating for you, and your last status can linger."
 Full changelog,Full changelog
@@ -660,6 +677,7 @@ Ghost mode diagnostics,Ghost mode diagnostics
 Go to the screen now. Metra records its layout in %1$d seconds.,Go to the screen now. Metra records its layout in %1$d seconds.
 Got it,Got it
 Gradient,Gradient
+Gray at the end,Gray at the end
 Gray at the end of the gradient,Gray at the end of the gradient
 "HDR videos light the screen extra bright. This plays the standard (SDR) version instead, so the screen doesn't jump to full brightness. Videos with no standard version still play in HDR.","HDR videos light the screen extra bright. This plays the standard (SDR) version instead, so the screen doesn't jump to full brightness. Videos with no standard version still play in HDR."
 HTTP,HTTP
@@ -863,6 +881,8 @@ Hold speed on Share,Hold speed on Share
 Hold the feed after the budget,Hold the feed after the budget
 "Hold the music disc at the bottom of the right column still, even where TikTok turns it. This overrides Spin the music disc.","Hold the music disc at the bottom of the right column still, even where TikTok turns it. This overrides Spin the music disc."
 Home,Home
+Home icon,Home icon
+Home label,Home label
 Home tab name,Home tab name
 Hook status,Hook status
 "How bright the buttons, caption and tabs stay when the Burn-in guard dims them. Lower is darker. Drag the slider or type a number.","How bright the buttons, caption and tabs stay when the Burn-in guard dims them. Lower is darker. Drag the slider or type a number."
@@ -887,6 +907,8 @@ Importing new history ended Undo for the earlier clear. You can clear the import
 Importing watch history,Importing watch history
 In a chat,In a chat
 Inbox,Inbox
+Inbox icon,Inbox icon
+Inbox label,Inbox label
 Inbox tab name,Inbox tab name
 Include diagnostic events,Include diagnostic events
 Included diagnostics,Included diagnostics
@@ -927,6 +949,7 @@ Keep watching in a small window,Keep watching in a small window
 "Kept to %1$s, the nearest value this row allows","Kept to %1$s, the nearest value this row allows"
 Kinds of post,Kinds of post
 LIVE,LIVE
+LIVE button,LIVE button
 LIVE chat auto-translate,LIVE chat auto-translate
 LIVE feed,LIVE feed
 LIVE followers range,LIVE followers range
@@ -969,6 +992,8 @@ Let the video reach the bottom of the screen on the main feed and show the tabs 
 Licenses,Licenses
 Lift text length limits,Lift text length limits
 Like,Like
+Like count,Like count
+Like icon,Like icon
 Like the video,Like the video
 Liked videos,Liked videos
 Likes aren't available for this video,Likes aren't available for this video
@@ -1062,12 +1087,14 @@ Move panel,Move panel
 Move right,Move right
 "Move to the next video when the current one ends. Pauses, open dialogs and screen-time holds stop it. Restart TikTok to apply this.","Move to the next video when the current one ends. Pauses, open dialogs and screen-time holds stop it. Restart TikTok to apply this."
 Move up,Move up
+Moving the gray turns the gradient on. It runs as an animation; 0 seconds keeps it still.,Moving the gray turns the gradient on. It runs as an animation; 0 seconds keeps it still.
 Music disc,Music disc
 Mute feed videos,Mute feed videos
 Muted,Muted
 Nearby,Nearby
 Network proxy,Network proxy
 Never from these countries,Never from these countries
+New,New
 New comment emoji,New comment emoji
 New device identity,New device identity
 New value,New value
@@ -1087,6 +1114,7 @@ No current value,No current value
 No current value and no active override,No current value and no active override
 No delay,No delay
 No elements yet,No elements yet
+No elements yet. Tap New to add one.,No elements yet. Tap New to add one.
 No font is imported,No font is imported
 No gate data is available. Refresh values from the menu to try again.,No gate data is available. Refresh values from the menu to try again.
 No gate reads were recorded. Use a TikTok feature while recording.,No gate reads were recorded. Use a TikTok feature while recording.
@@ -1123,6 +1151,7 @@ Normal-weight captions,Normal-weight captions
 "Not a handle or id, so ignored: %1$s","Not a handle or id, so ignored: %1$s"
 "Not a part Metra fills in, so it's kept as typed: %1$s","Not a part Metra fills in, so it's kept as typed: %1$s"
 Not blocked,Not blocked
+"Not found on the last look at the screen. It may not be on screen, or this version names it differently.","Not found on the last look at the screen. It may not be on screen, or this version names it differently."
 Not interested in this video,Not interested in this video
 Not read yet,Not read yet
 Not requested in this process yet,Not requested in this process yet
@@ -1144,6 +1173,8 @@ Nothing was recorded,Nothing was recorded
 Nothing was sent. Check the streak settings and try again.,Nothing was sent. Check the streak settings and try again.
 Notices from this project and the ones it's built on,Notices from this project and the ones it's built on
 OK,OK
+OLED overlays,OLED overlays
+OLED screen elements,OLED screen elements
 Off,Off
 "Off forces the value to false, on forces it to true. Reset lets TikTok decide again.","Off forces the value to false, on forces it to true. Reset lets TikTok decide again."
 Off. TikTok can report views and typing.,Off. TikTok can report views and typing.
@@ -1221,6 +1252,9 @@ Overrides are disabled in the Feature Gate Lab.,Overrides are disabled in the Fe
 Overrides disabled. Restart TikTok to apply this.,Overrides disabled. Restart TikTok to apply this.
 Overrides enabled. Restart TikTok to apply this.,Overrides enabled. Restart TikTok to apply this.
 Own profile counts,Own profile counts
+Packages,Packages
+Padding,Padding
+Pages,Pages
 Paid partnerships,Paid partnerships
 Pass TikTok's install checks,Pass TikTok's install checks
 Pause,Pause
@@ -1239,6 +1273,7 @@ Photos and stickers,Photos and stickers
 "Photos can't be saved to the folder in that file, so your photo folder was kept","Photos can't be saved to the folder in that file, so your photo folder was kept"
 Pick a .ttf or .otf file of up to %1$s MB.,Pick a .ttf or .otf file of up to %1$s MB.
 Pick all,Pick all
+Pick an element in the picture,Pick an element in the picture
 "Pick apps to add to the Share via row, before More. Each gets the same link the other apps get.","Pick apps to add to the Share via row, before More. Each gets the same link the other apps get."
 Pick for saving,Pick for saving
 Pick the actions to remove from the share sheet. Names you typed by hand that TikTok hasn't shown yet stay in the list above.,Pick the actions to remove from the share sheet. Names you typed by hand that TikTok hasn't shown yet stay in the list above.
@@ -1261,6 +1296,7 @@ Player,Player
 Playing at %1$sx,Playing at %1$sx
 Playlist posts,Playlist posts
 Plays videos that TikTok covers with a content warning without asking you to tap through first.,Plays videos that TikTok covers with a content warning without asking you to tap through first.
+Plus button,Plus button
 Popular,Popular
 Popups,Popups
 Post age,Post age
@@ -1271,6 +1307,7 @@ Prefer H.264 video,Prefer H.264 video
 Preset,Preset
 Preset applied. Restart TikTok to use it.,Preset applied. Restart TikTok to use it.
 Preset saved. Turn on overrides in the Lab to use it.,Preset saved. Turn on overrides in the Lab to use it.
+Presets,Presets
 Press and hold a comment to find Block this commenter in its menu. Their comments leave the list right away and an undo banner follows.,Press and hold a comment to find Block this commenter in its menu. Their comments leave the list right away and an undo banner follows.
 Press and hold a profile picture to save the full size original to your photo destination.,Press and hold a profile picture to save the full size original to your photo destination.
 "Press and hold a story to save it. Stories have no save button of their own, and holding one is how TikTok pauses it, so this takes that gesture over.","Press and hold a story to save it. Stories have no save button of their own, and holding one is how TikTok pauses it, so this takes that gesture over."
@@ -1290,10 +1327,13 @@ Profile,Profile
 Profile background,Profile background
 Profile banner,Profile banner
 Profile banner and new profile layout,Profile banner and new profile layout
+Profile icon,Profile icon
+Profile label,Profile label
 Profile picture,Profile picture
 Profile picture saved to %1$s,Profile picture saved to %1$s
 Profile share actions,Profile share actions
 Profile tab name,Profile tab name
+Progress bar,Progress bar
 Promotional music,Promotional music
 "Promotions, overlays, profile and inbox controls","Promotions, overlays, profile and inbox controls"
 Proof,Proof
@@ -1401,6 +1441,8 @@ Reviewed for TikTok %1$s,Reviewed for TikTok %1$s
 Reviewed presets,Reviewed presets
 Reviewed presets for TikTok %1$s,Reviewed presets for TikTok %1$s
 Right away,Right away
+Right bar,Right bar
+"Right bar, all together","Right bar, all together"
 Right column,Right column
 Right edge strip,Right edge strip
 Right to left,Right to left
@@ -1421,6 +1463,7 @@ Save as video,Save as video
 Save build details,Save build details
 Save cancelled. Nothing was saved.,Save cancelled. Nothing was saved.
 Save comments to Favorites,Save comments to Favorites
+Save count,Save count
 Save cover,Save cover
 Save cover button in the share sheet,Save cover button in the share sheet
 Save details as JSON,Save details as JSON
@@ -1428,6 +1471,7 @@ Save details beside the video,Save details beside the video
 "Save every photo in the post at full size as a JPEG, not as the screen shows it.","Save every photo in the post at full size as a JPEG, not as the screen shows it."
 Save field values,Save field values
 Save full report,Save full report
+Save icon,Save icon
 Save in which quality?,Save in which quality?
 Save media,Save media
 Save photo posts as a video,Save photo posts as a video
@@ -1506,6 +1550,7 @@ Search by name or gate key,Search by name or gate key
 "Search by name, description or category.","Search by name, description or category."
 Search countries or operators,Search countries or operators
 Search hidden creators,Search hidden creators
+Search icon,Search icon
 Search is unavailable on this screen,Search is unavailable on this screen
 Search loaded activity,Search loaded activity
 Search settings,Search settings
@@ -1514,6 +1559,7 @@ Search these comments,Search these comments
 "Search translated titles and descriptions, then open the original setting.","Search translated titles and descriptions, then open the original setting."
 Search within comments,Search within comments
 Seconds per photo,Seconds per photo
+Seconds per round,Seconds per round
 "Seconds. Zero keeps every length. If everything the feed just sent would be filtered out, the video closest to your limit is kept so the feed isn't empty.","Seconds. Zero keeps every length. If everything the feed just sent would be filtered out, the video closest to your limit is kept so the feed isn't empty."
 "Seconds. Zero keeps every length. Photo posts and videos without a known length stay. If everything the feed just sent would be filtered out, the video closest to your limit is kept.","Seconds. Zero keeps every length. Photo posts and videos without a known length stay. If everything the feed just sent would be filtered out, the video closest to your limit is kept."
 See-through bottom bar,See-through bottom bar
@@ -1563,9 +1609,13 @@ Settings couldn't refresh completely. Reopen settings and try again.,Settings co
 Settings restored. Restart TikTok to apply all changes.,Settings restored. Restart TikTok to apply all changes.
 Settings restored. The Feature Gate Lab rules were for another TikTok version and were left out. Restart TikTok to apply all changes.,Settings restored. The Feature Gate Lab rules were for another TikTok version and were left out. Restart TikTok to apply all changes.
 Several photos in one comment,Several photos in one comment
+Shape,Shape
 Share,Share
+Share count,Share count
+Share icon,Share icon
 Share sheet,Share sheet
 Shares range,Shares range
+Sharp edge,Sharp edge
 Shop,Shop
 Shop order updates and coupon messages no longer take up rows in the Inbox. Your orders are unchanged.,Shop order updates and coupon messages no longer take up rows in the Inbox. Your orders are unchanged.
 Shop posts,Shop posts
@@ -1663,9 +1713,11 @@ Skip update checks,Skip update checks
 Skipping videos with %1$s,Skipping videos with %1$s
 Sleep timer off,Sleep timer off
 Soft edge,Soft edge
+Soft edges of the video,Soft edges of the video
 Some Calm feed settings changed. Restore still puts back your earlier setup.,Some Calm feed settings changed. Restore still puts back your earlier setup.
 Some of these notes are in English.,Some of these notes are in English.
 Something is missing from %1$s. Tap for the whole report.,Something is missing from %1$s. Tap for the whole report.
+Song line,Song line
 Sound,Sound
 "Sound IDs saved by the player's sound button, separated by commas. Remove one to unblock it.","Sound IDs saved by the player's sound button, separated by commas. Remove one to unblock it."
 Sound format,Sound format
@@ -1712,6 +1764,7 @@ Stop a long press on Share from opening TikTok's quick share action.,Stop a long
 Stop analytics and tracking,Stop analytics and tracking
 Stop and save the feed capture,Stop and save the feed capture
 Stop feature gate recording,Stop feature gate recording
+Stop following,Stop following
 Stop on-device AI profiling,Stop on-device AI profiling
 Stop recording this LIVE,Stop recording this LIVE
 Stop search results playing on their own,Stop search results playing on their own
@@ -1758,6 +1811,12 @@ Swipe for brightness and volume,Swipe for brightness and volume
 Swipe left,Swipe left
 Swiping a message sideways no longer starts a reply to it. Taps and long presses work as before.,Swiping a message sideways no longer starts a reply to it. Taps and long presses work as before.
 System,System
+"Tab 1, the rightmost (usually For you)","Tab 1, the rightmost (usually For you)"
+Tab 2,Tab 2
+Tab 3,Tab 3
+Tab 4,Tab 4
+Tab 5,Tab 5
+"Tabs, all together","Tabs, all together"
 Tag saved videos with their details,Tag saved videos with their details
 "Take the Add comment bar off videos you open from a profile, a hashtag, a sound or search, so the video fills the screen down to the bottom. The comment button on the right still opens comments.","Take the Add comment bar off videos you open from a profile, a hashtag, a sound or search, so the video fills the screen down to the bottom. The comment button on the right still opens comments."
 Take the pulsing LIVE ring off profile pictures on the feed and in comments. Tapping the picture of a creator who's live opens their profile instead of the LIVE.,Take the pulsing LIVE ring off profile pictures on the feed and in comments. Tapping the picture of a creator who's live opens their profile instead of the LIVE.
@@ -1769,6 +1828,7 @@ Tap a story's heart twice within %1$d seconds. Removing a like stays immediate.,
 Tap again to follow,Tap again to follow
 Tap again to like,Tap again to like
 Tap again to repost,Tap again to repost
+Tap an element,Tap an element
 Tap the feed Follow button twice within %1$d seconds.,Tap the feed Follow button twice within %1$d seconds.
 Tap the like heart twice within %1$d seconds. Removing a like stays immediate.,Tap the like heart twice within %1$d seconds. Removing a like stays immediate.
 Tap to start the feed,Tap to start the feed
@@ -1777,6 +1837,8 @@ Tap to start the feed,Tap to start the feed
 Tapping more under a video opens its comments with the whole caption at the top instead of spreading the caption over the video. A tap on the caption itself does the same. Photo posts keep TikTok's own page for this.,Tapping more under a video opens its comments with the whole caption at the top instead of spreading the caption over the video. A tap on the caption itself does the same. Photo posts keep TikTok's own page for this.
 Technical details,Technical details
 "Technical details, %1$s","Technical details, %1$s"
+"Text block, all together","Text block, all together"
+Text bottom left,Text bottom left
 Text sticker words,Text sticker words
 That JSON file doesn't contain the supported TikTok watch history.,That JSON file doesn't contain the supported TikTok watch history.
 That backup was written by a newer Metra than this one. Nothing was altered.,That backup was written by a newer Metra than this one. Nothing was altered.
@@ -1902,6 +1964,7 @@ The story couldn't be saved. Try again.,The story couldn't be saved. Try again.
 The time of day the message goes out.,The time of day the message goes out.
 The video couldn't be made from these photos. Try again.,The video couldn't be made from these photos. Try again.
 "The video couldn't be saved. Try again, or choose Automatic.","The video couldn't be saved. Try again, or choose Automatic."
+"The video fades to black at its top and bottom edge. This is drawn on the video itself, not as a panel, and only in the feed.","The video fades to black at its top and bottom edge. This is drawn on the video itself, not as a panel, and only in the feed."
 "The video was saved, but its record couldn't be updated. A later save may make another copy.","The video was saved, but its record couldn't be updated. A later save may make another copy."
 "The video without the watermark couldn't be fetched, so TikTok's watermarked copy was saved to %1$s. Try again later for the clean copy.","The video without the watermark couldn't be fetched, so TikTok's watermarked copy was saved to %1$s. Try again later for the clean copy."
 "The video you're watching keeps playing to its end after you leave TikTok or turn the screen off, with TikTok's own media notification to pause it. TikTok's background play switch stays on while this is on. Restart TikTok to apply this.","The video you're watching keeps playing to its end after you leave TikTok or turn the screen off, with TikTok's own media notification to pause it. TikTok's background play switch stays on while this is on. Restart TikTok to apply this."
@@ -2015,6 +2078,8 @@ Today: %1$d video,Today: %1$d video
 Today: %1$d videos,Today: %1$d videos
 Too late to put the saved videos back,Too late to put the saved videos back
 Too many media saves are already running. Try again in a moment.,Too many media saves are already running. Try again in a moment.
+Top bar,Top bar
+Top edge,Top edge
 Tracking,Tracking
 "Tracking, device access and links","Tracking, device access and links"
 Translate button in comments,Translate button in comments
@@ -2024,6 +2089,7 @@ Translate into,Translate into
 Translated message,Translated message
 Translating…,Translating…
 Translation preview,Translation preview
+Transparency (100 = invisible),Transparency (100 = invisible)
 Transparent,Transparent
 Try a different word or clear the search.,Try a different word or clear the search.
 Try a different word or clear the search. Switches from patches you didn't tick in Morphe Manager aren't listed.,Try a different word or clear the search. Switches from patches you didn't tick in Morphe Manager aren't listed.
@@ -2094,6 +2160,7 @@ Use your own offline videos limit,Use your own offline videos limit
 "Use {creator}, {date}, {video_id} and {index} to build the name. {index} numbers the photos of a slideshow saved with Download original photos. TikTok's own save button numbers files by folder instead. The file ending is added for you.","Use {creator}, {date}, {video_id} and {index} to build the name. {index} numbers the photos of a slideshow saved with Download original photos. TikTok's own save button numbers files by folder instead. The file ending is added for you."
 Use {date} and {media_id} to build the name. Works for image and video stickers.,Use {date} and {media_id} to build the name. Works for image and video stickers.
 User ID copied,User ID copied
+Username,Username
 Username copied,Username copied
 Username last changed,Username last changed
 Uses TikTok's unpersonalized fill-in marker. Covers full batches and cached copies.,Uses TikTok's unpersonalized fill-in marker. Covers full batches and cached copies.
@@ -2203,4 +2270,5 @@ Your settings already match,Your settings already match
 collapsed,collapsed
 debug debugging logs logging,debug debugging logs logging
 expanded,expanded
+not found,not found
 this creator,this creator

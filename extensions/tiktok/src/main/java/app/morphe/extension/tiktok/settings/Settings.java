@@ -849,6 +849,16 @@ public class Settings extends BaseSettings {
      * panels, nothing drawn.
      */
     public static final StringSetting OLED_OVERLAYS = new StringSetting("oled_overlays", "[]");
+
+    /**
+     * What the reader dimmed element by element (OledElementDimmer): a JSON object from an element's
+     * name to whether it is on and how transparent it is.
+     */
+    public static final StringSetting OLED_ELEMENTS = new StringSetting("oled_elements", "{}");
+
+    /** How far the top and the bottom of the video fade into black, in pixels (OledVideoEdges). */
+    public static final IntegerSetting OLED_VIDEO_EDGE_TOP = new IntegerSetting("oled_video_edge_top", 0).withRange(0, 600);
+    public static final IntegerSetting OLED_VIDEO_EDGE_BOTTOM = new IntegerSetting("oled_video_edge_bottom", 0).withRange(0, 600);
     public static final BooleanSetting HIDE_SHARE_GUIDE = new BooleanSetting("hide_share_guide", FALSE);
     public static final BooleanSetting HIDE_RAIL_FOLLOW = new BooleanSetting("hide_rail_follow", FALSE);
     public static final BooleanSetting HIDE_RAIL_LIKE = new BooleanSetting("hide_rail_like", FALSE);

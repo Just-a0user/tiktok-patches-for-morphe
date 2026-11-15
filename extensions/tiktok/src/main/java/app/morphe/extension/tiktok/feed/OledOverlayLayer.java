@@ -15,6 +15,7 @@ import android.graphics.Paint;
 import android.graphics.RadialGradient;
 import android.graphics.RectF;
 import android.graphics.Shader;
+import android.os.SystemClock;
 
 import android.view.View;
 
@@ -80,9 +81,14 @@ final class OledOverlayLayer extends View {
         }
     }
 
+    /** How many steps one round of an animation is cut into. */
+    private static final int PHASE_STEPS = 240;
+
     @Override
     protected void onDraw(Canvas canvas) {
         Set<Long> live = new HashSet<>();
+        long slowest = 0L;
+        boolean moving = false;
         for (OledOverlay overlay : overlays) {
             live.add(overlay.id);
             boolean shown = editing || overlay.showsOn(page);
@@ -90,6 +96,10 @@ final class OledOverlayLayer extends View {
             Rendered drawn = renderedFor(overlay);
             if (drawn.bitmap != null) {
                 canvas.drawBitmap(drawn.bitmap, overlay.x - drawn.pad, overlay.y - drawn.pad, bitmapPaint);
+                if (overlay.animates()) {
+                    moving = true;
+                    slowest = Math.max(slowest, (long) overlay.width * overlay.height);
+                }
             }
             if (editing && overlay.id == selectedId) {
                 float half = borderPaint.getStrokeWidth() / 2f;
@@ -105,6 +115,8 @@ final class OledOverlayLayer extends View {
                 it.remove();
             }
         }
+        // An animated gradient draws again a few times a second; a big panel less often.
+        if (moving) postInvalidateDelayed(slowest > 1_500_000L ? 1000L : 250L);
     }
 
     @Override
@@ -119,7 +131,8 @@ final class OledOverlayLayer extends View {
 
     private Rendered renderedFor(OledOverlay overlay) {
         Rendered drawn = rendered.get(overlay.id);
-        String wanted = overlay.drawSignature();
+        int step = phaseStep(overlay);
+        String wanted = overlay.drawSignature() + "@" + step;
         if (drawn != null && wanted.equals(drawn.signature)) return drawn;
         if (drawn == null) {
             drawn = new Rendered();
@@ -130,12 +143,19 @@ final class OledOverlayLayer extends View {
         }
         drawn.signature = wanted;
         drawn.pad = Math.round(overlay.softEdgeDp * density);
-        drawn.bitmap = render(overlay, drawn.pad);
+        drawn.bitmap = render(overlay, drawn.pad, step / (float) PHASE_STEPS);
         return drawn;
     }
 
+    /** Where in its round an animated gradient is now, as a step of {@link #PHASE_STEPS}; 0 for a still one. */
+    private static int phaseStep(OledOverlay overlay) {
+        if (!overlay.animates()) return 0;
+        long period = overlay.animSeconds * 1000L;
+        return (int) ((SystemClock.uptimeMillis() % period) * PHASE_STEPS / period);
+    }
+
     /** The panel as a bitmap with {@code pad} pixels around it for its soft edge, or null if it can't be made. */
-    static Bitmap render(OledOverlay overlay, int pad) {
+    static Bitmap render(OledOverlay overlay, int pad, float phase) {
         int width = overlay.width + 2 * pad;
         int height = overlay.height + 2 * pad;
         if (width <= 0 || height <= 0 || (long) width * height > 40_000_000L) return null;
@@ -145,24 +165,32 @@ final class OledOverlayLayer extends View {
             Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
             paint.setStyle(Paint.Style.FILL);
             int black = Color.BLACK;
-            int gray = Color.rgb(overlay.gray, overlay.gray, overlay.gray);
+            // An animated gradient moves along the panel and swings its gray between black and the set
+            // gray; a still one keeps the set gray and stays where it is.
+            boolean moving = overlay.animates();
+            float swing = moving ? 0.5f - 0.5f * (float) Math.cos(2.0 * Math.PI * phase) : 1f;
+            int level = Math.round(overlay.gray * swing);
+            int gray = Color.rgb(level, level, level);
             float left = pad;
             float top = pad;
             float right = pad + overlay.width;
             float bottom = pad + overlay.height;
             float centerX = (left + right) / 2f;
             float centerY = (top + bottom) / 2f;
+            float shift = moving ? 2f * overlay.width * phase : 0f;
             switch (overlay.gradient) {
                 case OledOverlay.GRADIENT_LEFT_TO_RIGHT:
-                    paint.setShader(new LinearGradient(left, 0, right, 0, black, gray, Shader.TileMode.CLAMP));
+                    paint.setShader(new LinearGradient(left + shift, 0, right + shift, 0, black, gray,
+                            Shader.TileMode.MIRROR));
                     break;
                 case OledOverlay.GRADIENT_RIGHT_TO_LEFT:
-                    paint.setShader(new LinearGradient(right, 0, left, 0, black, gray, Shader.TileMode.CLAMP));
+                    paint.setShader(new LinearGradient(right - shift, 0, left - shift, 0, black, gray,
+                            Shader.TileMode.MIRROR));
                     break;
                 case OledOverlay.GRADIENT_CENTER_OUT: {
-                    float radius = Math.max(1f, overlay.width / 2f);
-                    RadialGradient radial = new RadialGradient(centerX, centerY, radius, black, gray,
-                            Shader.TileMode.CLAMP);
+                    float reach = Math.max(1f, overlay.width / 2f) * (moving ? 0.6f + 0.8f * swing : 1f);
+                    RadialGradient radial = new RadialGradient(centerX, centerY, reach, black, gray,
+                            Shader.TileMode.MIRROR);
                     Matrix squash = new Matrix();
                     squash.setScale(1f, overlay.height / (float) Math.max(1, overlay.width), centerX, centerY);
                     radial.setLocalMatrix(squash);

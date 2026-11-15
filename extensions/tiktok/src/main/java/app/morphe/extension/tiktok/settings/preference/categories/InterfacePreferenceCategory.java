@@ -20,6 +20,7 @@ import app.morphe.extension.tiktok.settings.SettingsStatus;
 import app.morphe.extension.tiktok.settings.preference.ChoicePreference;
 import app.morphe.extension.tiktok.settings.preference.NumberInputPreference;
 import app.morphe.extension.tiktok.settings.preference.OledOverlayEditorPreference;
+import app.morphe.extension.tiktok.settings.preference.OledScreenPreference;
 import app.morphe.extension.tiktok.settings.preference.PopupLabelChecklistPreference;
 import app.morphe.extension.tiktok.settings.preference.SectionHeadingPreference;
 import app.morphe.extension.tiktok.settings.preference.SwitchListPreference;
@@ -628,6 +629,7 @@ public final class InterfacePreferenceCategory extends ConditionalPreferenceCate
                     Settings.SEE_THROUGH_STATUS_BAR
             ));
             addPreference(new OledOverlayEditorPreference(context));
+            addPreference(new OledScreenPreference(context));
         }
     }
 

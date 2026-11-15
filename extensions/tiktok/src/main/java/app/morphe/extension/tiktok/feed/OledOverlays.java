@@ -57,7 +57,8 @@ public final class OledOverlays {
             View existing = frame.findViewWithTag(TAG);
 
             boolean editing = allowed && OledOverlayEditor.isEditingOn(activity, frame);
-            List<OledOverlay> list = editing ? OledOverlayEditor.working() : saved();
+            List<OledOverlay> list = resolve(activity, frame, editing ? OledOverlayEditor.working() : saved());
+            resolved = list;
             if (!allowed || (list.isEmpty() && !editing)) {
                 if (existing != null) frame.removeView(existing);
                 return;
@@ -86,6 +87,38 @@ public final class OledOverlays {
         } catch (Throwable ex) {
             Logger.printException(() -> "Could not update the OLED overlays", ex);
         }
+    }
+
+    /** The panels as last drawn: the ones that follow an element, placed where it is. */
+    private static List<OledOverlay> resolved = new java.util.ArrayList<>();
+
+    static List<OledOverlay> resolved() {
+        return resolved;
+    }
+
+    /**
+     * The panels to draw. One that follows an element is a copy sitting on the element, with the
+     * padding on every side, and is left out while the element is not on screen.
+     */
+    private static List<OledOverlay> resolve(Activity activity, FrameLayout frame, List<OledOverlay> base) {
+        List<OledOverlay> drawn = new java.util.ArrayList<>(base.size());
+        for (OledOverlay overlay : base) {
+            if (!overlay.follows()) {
+                drawn.add(overlay);
+                continue;
+            }
+            OledElements.Element element = OledElements.byKey(overlay.follow);
+            int[] bounds = element == null ? null : OledElements.boundsOf(activity, element, frame);
+            if (element != null) OledElements.note(element.key, bounds != null);
+            if (bounds == null) continue;
+            OledOverlay placed = overlay.copy();
+            placed.x = bounds[0] - overlay.padding;
+            placed.y = bounds[1] - overlay.padding;
+            placed.width = Math.max(20, bounds[2] + 2 * overlay.padding);
+            placed.height = Math.max(10, bounds[3] + 2 * overlay.padding);
+            drawn.add(placed);
+        }
+        return drawn;
     }
 
     /** Runs a pass on the main feed window again, for a change the editor just made. */

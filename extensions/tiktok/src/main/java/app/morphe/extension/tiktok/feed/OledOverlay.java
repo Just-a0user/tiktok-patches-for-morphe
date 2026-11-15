@@ -53,6 +53,18 @@ final class OledOverlay {
     int gray = 6;
     /** The pages it shows on, a mix of the PAGE_ flags. */
     int pages = ALL_PAGES;
+    /**
+     * Seconds for one round of the gradient's animation, which moves the gradient and swings the
+     * gray between black and its end value. 0 leaves the gradient still.
+     */
+    int animSeconds = 30;
+    /**
+     * The name of the element of the app this panel sits on and follows, or empty for a panel the
+     * reader placed. A followed panel takes its place and size from the element, plus the padding.
+     */
+    String follow = "";
+    /** Pixels the panel reaches past the element it follows, on every side. */
+    int padding = 6;
 
     OledOverlay copy() {
         OledOverlay other = new OledOverlay();
@@ -67,13 +79,25 @@ final class OledOverlay {
         other.gradient = gradient;
         other.gray = gray;
         other.pages = pages;
+        other.animSeconds = animSeconds;
+        other.follow = follow;
+        other.padding = padding;
         return other;
     }
 
     /** Everything that changes how it is drawn, as one string, so an unchanged panel is not redrawn. */
     String drawSignature() {
         return width + "x" + height + "r" + rounding + "a" + alpha + "s" + softEdgeDp
-                + gradient + gray;
+                + gradient + gray + "m" + animSeconds;
+    }
+
+    /** Whether the gradient is in motion. */
+    boolean animates() {
+        return animSeconds > 0 && !GRADIENT_OFF.equals(gradient);
+    }
+
+    boolean follows() {
+        return !follow.isEmpty();
     }
 
     boolean showsOn(int page) {
@@ -91,6 +115,9 @@ final class OledOverlay {
         alpha = within(alpha, 0, 100);
         softEdgeDp = within(softEdgeDp, 0, MAX_SOFT_EDGE_DP);
         gray = within(gray, 0, MAX_GRAY);
+        animSeconds = within(animSeconds, 0, 86_400);
+        padding = within(padding, 0, 200);
+        if (follow == null) follow = "";
         pages &= ALL_PAGES;
         if (!GRADIENT_LEFT_TO_RIGHT.equals(gradient) && !GRADIENT_RIGHT_TO_LEFT.equals(gradient)
                 && !GRADIENT_CENTER_OUT.equals(gradient)) {
@@ -115,6 +142,9 @@ final class OledOverlay {
         json.put("g", gradient);
         json.put("c", gray);
         json.put("p", pages);
+        json.put("m", animSeconds);
+        json.put("f", follow);
+        json.put("d", padding);
         return json;
     }
 
@@ -131,6 +161,9 @@ final class OledOverlay {
         overlay.gradient = json.optString("g", GRADIENT_OFF);
         overlay.gray = json.optInt("c", overlay.gray);
         overlay.pages = json.optInt("p", ALL_PAGES);
+        overlay.animSeconds = json.optInt("m", overlay.animSeconds);
+        overlay.follow = json.optString("f", "");
+        overlay.padding = json.optInt("d", overlay.padding);
         overlay.clamp();
         return overlay;
     }
