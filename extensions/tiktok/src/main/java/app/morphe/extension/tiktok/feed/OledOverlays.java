@@ -77,7 +77,10 @@ public final class OledOverlays {
                     editing, editing ? OledOverlayEditor.selectedId() : -1L);
             // While the editor is open the layer takes the touches and moves the selected panel.
             final View windowFrame = frame;
-            layer.setOnTouchListener(editing
+            boolean takesTouches = editing && !OledOverlayEditor.minimized();
+            layer.setClickable(takesTouches);
+            layer.setHighlight(takesTouches ? OledOverlayEditor.highlight(activity, frame) : null);
+            layer.setOnTouchListener(takesTouches
                     ? (view, event) -> OledOverlayEditor.onLayerTouch(
                             event, windowFrame.getWidth(), windowFrame.getHeight())
                     : null);
@@ -125,6 +128,11 @@ public final class OledOverlays {
     static void refresh() {
         Activity activity = lastFeed.get();
         if (activity != null && !activity.isFinishing()) VideoOverlayHider.applyTo(activity);
+    }
+
+    /** The same, opening on one of the editor's tabs. */
+    public static void openEditorAt(android.content.Context context, int tab) {
+        OledOverlayEditor.requestAt(context, tab);
     }
 
     /** From the settings row: closes the settings and opens the editor over the feed. */

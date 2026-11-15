@@ -859,6 +859,12 @@ public class Settings extends BaseSettings {
     /** How far the top and the bottom of the video fade into black, in pixels (OledVideoEdges). */
     public static final IntegerSetting OLED_VIDEO_EDGE_TOP = new IntegerSetting("oled_video_edge_top", 0).withRange(0, 600);
     public static final IntegerSetting OLED_VIDEO_EDGE_BOTTOM = new IntegerSetting("oled_video_edge_bottom", 0).withRange(0, 600);
+    /** How dark the video edge gets at the very edge, 0 to 100 percent. */
+    public static final IntegerSetting OLED_VIDEO_EDGE_STRENGTH = new IntegerSetting("oled_video_edge_strength", 100).withRange(0, 100);
+    /** The curve of the video edge: 0 straight, 1 smooth, 2 a hard band. */
+    public static final IntegerSetting OLED_VIDEO_EDGE_SHAPE = new IntegerSetting("oled_video_edge_shape", 0).withRange(0, 2);
+    /** The colour of the video edge as six hex digits. */
+    public static final StringSetting OLED_VIDEO_EDGE_COLOR = new StringSetting("oled_video_edge_color", "000000");
     public static final BooleanSetting HIDE_SHARE_GUIDE = new BooleanSetting("hide_share_guide", FALSE);
     public static final BooleanSetting HIDE_RAIL_FOLLOW = new BooleanSetting("hide_rail_follow", FALSE);
     public static final BooleanSetting HIDE_RAIL_LIKE = new BooleanSetting("hide_rail_like", FALSE);

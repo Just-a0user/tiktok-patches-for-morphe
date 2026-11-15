@@ -49,6 +49,14 @@ final class OledOverlayLayer extends View {
     private boolean editing;
     private long selectedId = -1L;
     private String signature = "";
+    private int[] highlight;
+
+    /** A frame around a real element of the app, x, y, width, height, or null for none. */
+    void setHighlight(int[] rect) {
+        if (java.util.Arrays.equals(rect, highlight)) return;
+        highlight = rect;
+        invalidate();
+    }
 
     OledOverlayLayer(Context context) {
         super(context);
@@ -106,6 +114,9 @@ final class OledOverlayLayer extends View {
                 canvas.drawRect(overlay.x + half, overlay.y + half,
                         overlay.x + overlay.width - half, overlay.y + overlay.height - half, borderPaint);
             }
+        }
+        if (highlight != null) {
+            canvas.drawRect(highlight[0], highlight[1], highlight[0] + highlight[2], highlight[1] + highlight[3], borderPaint);
         }
         // A panel that is gone gives its bitmap back.
         for (java.util.Iterator<Map.Entry<Long, Rendered>> it = rendered.entrySet().iterator(); it.hasNext(); ) {

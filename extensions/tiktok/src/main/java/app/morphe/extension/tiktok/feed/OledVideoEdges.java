@@ -36,8 +36,12 @@ final class OledVideoEdges {
     /** {@code allowed} is false under Pause and without the overlay patch. */
     static void pass(Activity activity, boolean allowed) {
         try {
-            int top = allowed ? Settings.OLED_VIDEO_EDGE_TOP.get() : 0;
-            int bottom = allowed ? Settings.OLED_VIDEO_EDGE_BOTTOM.get() : 0;
+            int strength = Settings.OLED_VIDEO_EDGE_STRENGTH.get();
+            boolean on = allowed && strength > 0;
+            int top = on ? Settings.OLED_VIDEO_EDGE_TOP.get() : 0;
+            int bottom = on ? Settings.OLED_VIDEO_EDGE_BOTTOM.get() : 0;
+            int shape = Settings.OLED_VIDEO_EDGE_SHAPE.get();
+            int rgb = parseColor(Settings.OLED_VIDEO_EDGE_COLOR.get());
             if (top <= 0 && bottom <= 0 && PUT.isEmpty()) return;
             for (View player : VideoOverlayHider.viewsNamed(activity, PLAYER_VIEW)) {
                 Drawable ours = PUT.get(player);
@@ -49,10 +53,10 @@ final class OledVideoEdges {
                 Drawable current = player.getForeground();
                 if (current != null && current != ours) continue;
                 if (ours instanceof EdgeDrawable) {
-                    ((EdgeDrawable) ours).set(top, bottom);
+                    ((EdgeDrawable) ours).set(top, bottom, strength, shape, rgb);
                 } else {
                     EdgeDrawable edge = new EdgeDrawable();
-                    edge.set(top, bottom);
+                    edge.set(top, bottom, strength, shape, rgb);
                     player.setForeground(edge);
                     PUT.put(player, edge);
                 }
@@ -63,24 +67,53 @@ final class OledVideoEdges {
         }
     }
 
-    /** Black at the very top and bottom, fading to nothing over the set number of pixels. */
+    /** Six hex digits as a colour; anything else is black. */
+    static int parseColor(String text) {
+        try {
+            return Integer.parseInt(text.trim().replace("#", ""), 16) & 0xFFFFFF;
+        } catch (RuntimeException ex) {
+            return 0;
+        }
+    }
+
+    /** From the edge inwards: the colour at its set strength fading to nothing, along the chosen curve. */
+    private static int[] ramp(int rgb, int strength, int shape) {
+        int steps = 12;
+        int[] colors = new int[steps];
+        for (int i = 0; i < steps; i++) {
+            float t = i / (steps - 1f);
+            float keep = shape == 2 ? 1f : shape == 1 ? 1f - t * t * (3f - 2f * t) : 1f - t;
+            colors[i] = (Math.round(255f * strength / 100f * keep) << 24) | rgb;
+        }
+        return colors;
+    }
+
+    /** The colour at the very top and bottom, fading to nothing over the set number of pixels. */
     private static final class EdgeDrawable extends Drawable {
-        private final GradientDrawable topFade = new GradientDrawable(
-                GradientDrawable.Orientation.TOP_BOTTOM, new int[]{0xFF000000, 0x00000000});
-        private final GradientDrawable bottomFade = new GradientDrawable(
-                GradientDrawable.Orientation.BOTTOM_TOP, new int[]{0xFF000000, 0x00000000});
+        private GradientDrawable topFade;
+        private GradientDrawable bottomFade;
         private int top;
         private int bottom;
+        private int strength = -1;
+        private int shape = -1;
+        private int rgb = -1;
 
-        void set(int topPx, int bottomPx) {
-            if (topPx == top && bottomPx == bottom) return;
+        void set(int topPx, int bottomPx, int newStrength, int newShape, int newRgb) {
+            if (topPx == top && bottomPx == bottom && newStrength == strength && newShape == shape && newRgb == rgb) return;
             top = topPx;
             bottom = bottomPx;
+            strength = newStrength;
+            shape = newShape;
+            rgb = newRgb;
+            int[] colors = ramp(rgb, strength, shape);
+            topFade = new GradientDrawable(GradientDrawable.Orientation.TOP_BOTTOM, colors);
+            bottomFade = new GradientDrawable(GradientDrawable.Orientation.BOTTOM_TOP, colors);
             invalidateSelf();
         }
 
         @Override
         public void draw(Canvas canvas) {
+            if (topFade == null) return;
             int width = getBounds().width();
             int height = getBounds().height();
             if (top > 0) {

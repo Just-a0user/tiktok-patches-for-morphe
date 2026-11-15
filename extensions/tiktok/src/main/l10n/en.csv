@@ -143,7 +143,7 @@ A long press on a video you opened from search opens the same menu as on For You
 A message is already on its way,A message is already on its way
 A name of your own under this tab's icon. Leave it empty to keep TikTok's.,A name of your own under this tab's icon. Leave it empty to keep TikTok's.
 A port is a whole number from 1 to 65535,A port is a whole number from 1 to 65535
-"A preset is a panel that follows the real element. It opens over the feed first, where you can change it before saving.","A preset is a panel that follows the real element. It opens over the feed first, where you can change it before saving."
+"A preset is a panel that follows the real element. It appears on the feed, where you can change it before saving.","A preset is a panel that follows the real element. It appears on the feed, where you can change it before saving."
 A press on Share under a video copies its link instead of opening the share sheet. Press Share again right after to open the sheet.,A press on Share under a video copies its link instead of opening the share sheet. Press Share again right after to open the sheet.
 "A profile's share sheet gets an Account facts button. It shows what TikTok already sent about the account: when it joined, its region and language, when its username and display name last changed, whether it's private and whether its liked videos are public. Nothing extra is fetched.","A profile's share sheet gets an Account facts button. It shows what TikTok already sent about the account: when it joined, its region and language, when its username and display name last changed, whether it's private and whether its liked videos are public. Nothing extra is fetched."
 "A screen's layout is recorded. Export the diagnostic report to send it, or tap to record another.","A screen's layout is recorded. Export the diagnostic report to send it, or tap to record another."
@@ -375,6 +375,7 @@ Clearing suggested accounts,Clearing suggested accounts
 Close,Close
 Close TikTok after,Close TikTok after
 Color commenter names,Color commenter names
+Colour (hex),Colour (hex)
 "Comma separated names exactly as the row under a profile's bio shows them, such as TikTok Studio or Your orders. Restart TikTok to apply this.","Comma separated names exactly as the row under a profile's bio shows them, such as TikTok Studio or Your orders. Restart TikTok to apply this."
 Comma-separated action IDs. Other video actions remain available.,Comma-separated action IDs. Other video actions remain available.
 Comma-separated share option IDs. Other sharing apps remain available.,Comma-separated share option IDs. Other sharing apps remain available.
@@ -517,8 +518,6 @@ Diagnostic data cleared. Tap again to put it back.,Diagnostic data cleared. Tap 
 Diagnostic data put back,Diagnostic data put back
 Diagnostic report copied to the clipboard,Diagnostic report copied to the clipboard
 Diagnostics,Diagnostics
-Dim single elements,Dim single elements
-"Dim single elements of the feed screen, ready-made panels, a picture to tap an element in, and soft edges for the video.","Dim single elements of the feed screen, ready-made panels, a picture to tap an element in, and soft edges for the video."
 Dim this element,Dim this element
 Disable,Disable
 Disabled,Disabled
@@ -549,8 +548,10 @@ Draw spoken captions at regular weight instead of TikTok's bold. Applies to the 
 Each area shows how many of the things Metra looks for were found in this TikTok and how many are missing.,Each area shows how many of the things Metra looks for were found in this TikTok and how many are missing.
 Easier comment likes,Easier comment likes
 Edge strip width,Edge strip width
+Edges,Edges
 Edit OLED overlays,Edit OLED overlays
 Element,Element
+Elements,Elements
 Empty,Empty
 "Empty the menu that opens when you press and hold TikTok's icon on the home screen. Turning this off asks TikTok to build them again. Tapping the icon still opens the app, and a shortcut you pinned yourself stays where you put it.","Empty the menu that opens when you press and hold TikTok's icon on the home screen. Turning this off asks TikTok to build them again. Tapping the icon still opens the app, and a shortcut you pinned yourself stays where you put it."
 Enable,Enable
@@ -683,6 +684,7 @@ Gray at the end of the gradient,Gray at the end of the gradient
 HTTP,HTTP
 Hand-off,Hand-off
 Handle or id,Handle or id
+Hard band,Hard band
 Height,Height
 Hidden %1$s on this phone,Hidden %1$s on this phone
 Hidden LIVE categories,Hidden LIVE categories
@@ -1151,7 +1153,6 @@ Normal-weight captions,Normal-weight captions
 "Not a handle or id, so ignored: %1$s","Not a handle or id, so ignored: %1$s"
 "Not a part Metra fills in, so it's kept as typed: %1$s","Not a part Metra fills in, so it's kept as typed: %1$s"
 Not blocked,Not blocked
-"Not found on the last look at the screen. It may not be on screen, or this version names it differently.","Not found on the last look at the screen. It may not be on screen, or this version names it differently."
 Not interested in this video,Not interested in this video
 Not read yet,Not read yet
 Not requested in this process yet,Not requested in this process yet
@@ -1191,6 +1192,7 @@ On. Metra hasn't seen TikTok send any reports since it started.,On. Metra hasn't
 On. Restore puts back the feed setup you had before.,On. Restore puts back the feed setup you had before.
 "Once today's budget runs out, the hold stays and can't be dismissed. The budget settings are locked until the day starts over. Turn this off any time before the budget runs out.","Once today's budget runs out, the hold stays and can't be dismissed. The budget settings are locked until the day starts over. Turn this off any time before the budget runs out."
 One area was checked and everything it needs is here.,One area was checked and everything it needs is here.
+One element,One element
 "One language code, like en or es. Comments and captions TikTok translates come out in this language instead of the app's. Leave it empty to keep TikTok's choice.","One language code, like en or es. Comments and captions TikTok translates come out in this language instead of the app's. Leave it empty to keep TikTok's choice."
 One minute left,One minute left
 One more save waiting,One more save waiting
@@ -1228,6 +1230,7 @@ Open the story again and try once more,Open the story again and try once more
 "Opens TikTok's own profile background editor in Edit profile, and shows the backgrounds other profiles have set. TikTok's servers may still refuse to save one for an account TikTok hasn't offered it to yet.","Opens TikTok's own profile background editor in Edit profile, and shows the backgrounds other profiles have set. TikTok's servers may still refuse to save one for an account TikTok hasn't offered it to yet."
 Opens a GitHub report with your versions and settings filled in. Add what happened.,Opens a GitHub report with your versions and settings filled in. Add what happened.
 Opens github.com in your browser,Opens github.com in your browser
+"Opens over the feed: dim single elements by tapping them, add ready-made panels, and set the soft edges of the video.","Opens over the feed: dim single elements by tapping them, add ready-made panels, and set the soft edges of the video."
 Operator code,Operator code
 Operator name,Operator name
 "Optional, used with the user name. It isn't shown, logged or put in a backup.","Optional, used with the user name. It isn't shown, logged or put in a backup."
@@ -1273,7 +1276,6 @@ Photos and stickers,Photos and stickers
 "Photos can't be saved to the folder in that file, so your photo folder was kept","Photos can't be saved to the folder in that file, so your photo folder was kept"
 Pick a .ttf or .otf file of up to %1$s MB.,Pick a .ttf or .otf file of up to %1$s MB.
 Pick all,Pick all
-Pick an element in the picture,Pick an element in the picture
 "Pick apps to add to the Share via row, before More. Each gets the same link the other apps get.","Pick apps to add to the Share via row, before More. Each gets the same link the other apps get."
 Pick for saving,Pick for saving
 Pick the actions to remove from the share sheet. Names you typed by hand that TikTok hasn't shown yet stay in the list above.,Pick the actions to remove from the share sheet. Names you typed by hand that TikTok hasn't shown yet stay in the list above.
@@ -1712,8 +1714,8 @@ Skip update checks,Skip update checks
 "Skipped entries are invalid, expired, already recorded, or older than the newest %1$s videos.","Skipped entries are invalid, expired, already recorded, or older than the newest %1$s videos."
 Skipping videos with %1$s,Skipping videos with %1$s
 Sleep timer off,Sleep timer off
+Smooth,Smooth
 Soft edge,Soft edge
-Soft edges of the video,Soft edges of the video
 Some Calm feed settings changed. Restore still puts back your earlier setup.,Some Calm feed settings changed. Restore still puts back your earlier setup.
 Some of these notes are in English.,Some of these notes are in English.
 Something is missing from %1$s. Tap for the whole report.,Something is missing from %1$s. Tap for the whole report.
@@ -1798,7 +1800,9 @@ Stories,Stories
 Story,Story
 Story position,Story position
 Story saved to %1$s,Story saved to %1$s
+Straight,Straight
 Streak,Streak
+Strength,Strength
 Structured value observed,Structured value observed
 Subtitle language,Subtitle language
 Subtitles,Subtitles
@@ -1828,7 +1832,7 @@ Tap a story's heart twice within %1$d seconds. Removing a like stays immediate.,
 Tap again to follow,Tap again to follow
 Tap again to like,Tap again to like
 Tap again to repost,Tap again to repost
-Tap an element,Tap an element
+"Tap an element on the feed, or pick it with the arrows. Changes here are kept at once.","Tap an element on the feed, or pick it with the arrows. Changes here are kept at once."
 Tap the feed Follow button twice within %1$d seconds.,Tap the feed Follow button twice within %1$d seconds.
 Tap the like heart twice within %1$d seconds. Removing a like stays immediate.,Tap the like heart twice within %1$d seconds. Removing a like stays immediate.
 Tap to start the feed,Tap to start the feed
@@ -1964,7 +1968,7 @@ The story couldn't be saved. Try again.,The story couldn't be saved. Try again.
 The time of day the message goes out.,The time of day the message goes out.
 The video couldn't be made from these photos. Try again.,The video couldn't be made from these photos. Try again.
 "The video couldn't be saved. Try again, or choose Automatic.","The video couldn't be saved. Try again, or choose Automatic."
-"The video fades to black at its top and bottom edge. This is drawn on the video itself, not as a panel, and only in the feed.","The video fades to black at its top and bottom edge. This is drawn on the video itself, not as a panel, and only in the feed."
+"The video fades at its top and bottom edge. This is drawn on the video itself, not as a panel, and only in the feed. Kept at once.","The video fades at its top and bottom edge. This is drawn on the video itself, not as a panel, and only in the feed. Kept at once."
 "The video was saved, but its record couldn't be updated. A later save may make another copy.","The video was saved, but its record couldn't be updated. A later save may make another copy."
 "The video without the watermark couldn't be fetched, so TikTok's watermarked copy was saved to %1$s. Try again later for the clean copy.","The video without the watermark couldn't be fetched, so TikTok's watermarked copy was saved to %1$s. Try again later for the clean copy."
 "The video you're watching keeps playing to its end after you leave TikTok or turn the screen off, with TikTok's own media notification to pause it. TikTok's background play switch stays on while this is on. Restart TikTok to apply this.","The video you're watching keeps playing to its end after you leave TikTok or turn the screen off, with TikTok's own media notification to pause it. TikTok's background play switch stays on while this is on. Restart TikTok to apply this."

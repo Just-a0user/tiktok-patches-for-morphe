@@ -19,7 +19,10 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+import android.widget.EditText;
+import android.widget.HorizontalScrollView;
 import android.widget.ScrollView;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -58,6 +61,22 @@ final class OledOverlayEditor {
     private static List<OledOverlay> working = new ArrayList<>();
     private static long selected = -1L;
     private static int tab;
+    private static final int TAB_ELEMENTS = 3;
+    private static int initialTab;
+    private static boolean minimized;
+    private static WeakReference<View> bubbleRef = new WeakReference<>(null);
+    private static String elementKey = "like_icon";
+    private static boolean presetSoft = true;
+    private static TextView elementName;
+    private static TextView presetElementName;
+    private static Switch elementSwitch;
+    private static OledUi.NumberSlider elementSlider;
+    private static OledUi.NumberSlider edgeTop;
+    private static OledUi.NumberSlider edgeBottom;
+    private static OledUi.NumberSlider edgeStrength;
+    private static Button edgeShape;
+    private static Button presetVersion;
+    private static EditText edgeColor;
     private static WeakReference<Activity> window = new WeakReference<>(null);
     private static WeakReference<FrameLayout> frameRef = new WeakReference<>(null);
     private static WeakReference<View> panelRef = new WeakReference<>(null);
@@ -92,6 +111,12 @@ final class OledOverlayEditor {
 
     /** From the settings: leave the settings and open the editor on the feed behind them. */
     static void request(Context context) {
+        requestAt(context, 0);
+    }
+
+    /** The same, with the editor opening on one of its tabs. */
+    static void requestAt(Context context, int firstTab) {
+        initialTab = firstTab;
         requested = true;
         Activity settings = activityOf(context);
         if (settings != null) settings.finish();
@@ -127,6 +152,8 @@ final class OledOverlayEditor {
     static void keepPanelOnTop(FrameLayout frame) {
         View panel = panelRef.get();
         if (panel != null && frame.indexOfChild(panel) != frame.getChildCount() - 1) panel.bringToFront();
+        View bubble = bubbleRef.get();
+        if (bubble != null && frame.indexOfChild(bubble) != frame.getChildCount() - 1) bubble.bringToFront();
     }
 
     private static void open(Activity activity, FrameLayout frame) {
@@ -147,7 +174,9 @@ final class OledOverlayEditor {
             }
             pendingPreview = null;
         }
-        tab = 0;
+        tab = initialTab;
+        initialTab = 0;
+        minimized = false;
         attachPanel(activity, frame);
     }
 
@@ -170,6 +199,16 @@ final class OledOverlayEditor {
         params.setMargins(margin, margin * 4, margin, margin * 4);
         params.gravity = Gravity.TOP | Gravity.CENTER_HORIZONTAL;
         frame.addView(panel, params);
+        View oldBubble = bubbleRef.get();
+        if (oldBubble != null && oldBubble.getParent() instanceof ViewGroup) ((ViewGroup) oldBubble.getParent()).removeView(oldBubble);
+        View bubble = buildBubble(activity);
+        bubbleRef = new WeakReference<>(bubble);
+        FrameLayout.LayoutParams bubbleParams = new FrameLayout.LayoutParams(OledUi.dp(activity, 48), OledUi.dp(activity, 48));
+        bubbleParams.gravity = Gravity.TOP | Gravity.END;
+        bubbleParams.setMargins(0, OledUi.dp(activity, 120), OledUi.dp(activity, 12), 0);
+        frame.addView(bubble, bubbleParams);
+        panel.setVisibility(minimized ? View.GONE : View.VISIBLE);
+        bubble.setVisibility(minimized ? View.VISIBLE : View.GONE);
         sync();
     }
 
@@ -182,6 +221,10 @@ final class OledOverlayEditor {
         View panel = panelRef.get();
         if (panel != null && panel.getParent() instanceof ViewGroup) ((ViewGroup) panel.getParent()).removeView(panel);
         panelRef = new WeakReference<>(null);
+        View bubble = bubbleRef.get();
+        if (bubble != null && bubble.getParent() instanceof ViewGroup) ((ViewGroup) bubble.getParent()).removeView(bubble);
+        bubbleRef = new WeakReference<>(null);
+        minimized = false;
         working = new ArrayList<>();
         OledOverlays.quick();
     }
@@ -270,6 +313,9 @@ final class OledOverlayEditor {
         Button save = OledUi.button(activity, L10n.t(activity, "Save"));
         save.setOnClickListener(v -> save(activity));
         header.addView(save, OledUi.wrap(activity));
+        Button minimize = OledUi.button(activity, "\u2014");
+        minimize.setOnClickListener(v -> setMinimized(true));
+        header.addView(minimize, OledUi.wrap(activity));
         Button closeButton = OledUi.button(activity, "✕");
         closeButton.setOnClickListener(v -> askBeforeClosing(activity));
         header.addView(closeButton, OledUi.wrap(activity));
@@ -293,20 +339,28 @@ final class OledOverlayEditor {
 
         // The three tabs.
         LinearLayout tabs = OledUi.row(activity);
-        String[] tabNames = {L10n.t(activity, "Shape"), L10n.t(activity, "Gradient"), L10n.t(activity, "Pages")};
+        String[] tabNames = {L10n.t(activity, "Shape"), L10n.t(activity, "Gradient"), L10n.t(activity, "Pages"),
+                L10n.t(activity, "Elements"), L10n.t(activity, "Presets"), L10n.t(activity, "Edges")};
         for (int index = 0; index < tabNames.length; index++) {
             final int shown = index;
             Button button = OledUi.button(activity, tabNames[index]);
             button.setOnClickListener(v -> setTab(shown));
             TAB_BUTTONS.add(button);
-            tabs.addView(button, OledUi.weight(activity, 1f));
+            tabs.addView(button, OledUi.wrap(activity));
         }
-        column.addView(tabs);
+        HorizontalScrollView tabScroll = new HorizontalScrollView(activity);
+        tabScroll.setHorizontalScrollBarEnabled(false);
+        tabScroll.addView(tabs);
+        column.addView(tabScroll);
 
         column.addView(buildShape(activity, windowWidth, windowHeight));
         column.addView(buildGradient(activity));
         column.addView(buildPages(activity));
+        column.addView(buildElements(activity));
+        column.addView(buildPresets(activity));
+        column.addView(buildEdges(activity));
         setTab(tab);
+        scroll.setTag("oled_editor_panel");
         return scroll;
     }
 
@@ -401,6 +455,290 @@ final class OledOverlayEditor {
             TAB_BUTTONS.get(index).setBackground(OledUi.rounded(activity,
                     index == shown ? OledUi.ACCENT : OledUi.BUTTON, 10));
             TAB_BUTTONS.get(index).setTextColor(index == shown ? 0xFF001414 : OledUi.TEXT);
+        }
+    }
+
+    // The tabs that work on the real feed behind the editor.
+
+    private static int elementIndex() {
+        List<OledElements.Element> all = OledElements.all();
+        for (int index = 0; index < all.size(); index++) {
+            if (all.get(index).key.equals(elementKey)) return index;
+        }
+        return 0;
+    }
+
+    private static void stepElement(int by) {
+        List<OledElements.Element> all = OledElements.all();
+        elementKey = all.get((elementIndex() + by + all.size()) % all.size()).key;
+        syncElement();
+        OledOverlays.quick();
+    }
+
+    private static LinearLayout elementPicker(Activity activity, boolean forElements) {
+        LinearLayout pick = OledUi.row(activity);
+        Button previous = OledUi.button(activity, "\u25C0");
+        previous.setOnClickListener(v -> stepElement(-1));
+        pick.addView(previous, OledUi.wrap(activity));
+        TextView name = OledUi.text(activity, "", 13f, OledUi.ACCENT);
+        name.setGravity(Gravity.CENTER);
+        if (forElements) elementName = name; else presetElementName = name;
+        pick.addView(name, OledUi.weight(activity, 1f));
+        Button next = OledUi.button(activity, "\u25B6");
+        next.setOnClickListener(v -> stepElement(1));
+        pick.addView(next, OledUi.wrap(activity));
+        return pick;
+    }
+
+    private static View buildElements(Activity activity) {
+        LinearLayout section = OledUi.column(activity);
+        section.addView(OledUi.text(activity, L10n.t(activity,
+                "Tap an element on the feed, or pick it with the arrows. Changes here are kept at once."), 11f, OledUi.MUTED));
+        section.addView(elementPicker(activity, true));
+        elementSwitch = new Switch(activity);
+        elementSwitch.setText(L10n.t(activity, "Dim this element"));
+        elementSwitch.setTextColor(OledUi.TEXT);
+        elementSwitch.setOnCheckedChangeListener((button, checked) -> {
+            if (syncing) return;
+            OledElementSettings.set(elementKey, checked, OledElementSettings.transparency(elementKey));
+            syncElement();
+            OledOverlays.refresh();
+        });
+        section.addView(elementSwitch);
+        elementSlider = new OledUi.NumberSlider(activity, L10n.t(activity, "Transparency (100 = invisible)"), "%",
+                0, 100, 100, value -> {
+                    if (syncing) return;
+                    OledElementSettings.set(elementKey, true, value);
+                    syncElement();
+                    OledOverlays.refresh();
+                });
+        section.addView(elementSlider.root);
+        SECTIONS.add(section);
+        return section;
+    }
+
+    private static View buildPresets(Activity activity) {
+        LinearLayout section = OledUi.column(activity);
+        section.addView(OledUi.text(activity, L10n.t(activity,
+                "A preset is a panel that follows the real element. It appears on the feed, where you can change it before saving."),
+                11f, OledUi.MUTED));
+        presetVersion = OledUi.button(activity, "");
+        presetVersion.setOnClickListener(v -> {
+            presetSoft = !presetSoft;
+            syncPresetVersion();
+        });
+        section.addView(presetVersion, new LinearLayout.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        section.addView(OledUi.text(activity, L10n.t(activity, "Packages"), 13f, OledUi.ACCENT));
+        for (java.util.Map.Entry<String, List<String>> pack : OledPresets.PACKAGES.entrySet()) {
+            final List<String> keys = pack.getValue();
+            Button button = OledUi.button(activity, L10n.t(activity, pack.getKey()));
+            button.setOnClickListener(v -> addPanels(OledPresets.forElements(keys, presetSoft)));
+            section.addView(button, new LinearLayout.LayoutParams(
+                    ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        }
+        section.addView(OledUi.text(activity, L10n.t(activity, "One element"), 13f, OledUi.ACCENT));
+        section.addView(elementPicker(activity, false));
+        Button add = OledUi.button(activity, "+ " + L10n.t(activity, "Add"));
+        add.setOnClickListener(v -> {
+            List<OledOverlay> one = new ArrayList<>();
+            one.add(OledPresets.forElement(elementKey, presetSoft));
+            addPanels(one);
+        });
+        section.addView(add, new LinearLayout.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        SECTIONS.add(section);
+        return section;
+    }
+
+    private static void addPanels(List<OledOverlay> panels) {
+        if (panels.isEmpty()) return;
+        long id = nextId();
+        for (OledOverlay panel : panels) {
+            panel.id = id++;
+            working.add(panel);
+        }
+        selected = panels.get(0).id;
+        setTab(0);
+        changed();
+    }
+
+    private static final String[] EDGE_SHAPES = {"Straight", "Smooth", "Hard band"};
+
+    private static View buildEdges(Activity activity) {
+        LinearLayout section = OledUi.column(activity);
+        section.addView(OledUi.text(activity, L10n.t(activity,
+                "The video fades at its top and bottom edge. This is drawn on the video itself, not as a panel, and only in the feed. Kept at once."),
+                11f, OledUi.MUTED));
+        edgeTop = new OledUi.NumberSlider(activity, L10n.t(activity, "Top edge"), "px", 0, 400, 600,
+                value -> { Settings.OLED_VIDEO_EDGE_TOP.save(value); OledOverlays.refresh(); });
+        edgeBottom = new OledUi.NumberSlider(activity, L10n.t(activity, "Bottom edge"), "px", 0, 400, 600,
+                value -> { Settings.OLED_VIDEO_EDGE_BOTTOM.save(value); OledOverlays.refresh(); });
+        edgeStrength = new OledUi.NumberSlider(activity, L10n.t(activity, "Strength"), "%", 0, 100, 100,
+                value -> { Settings.OLED_VIDEO_EDGE_STRENGTH.save(value); OledOverlays.refresh(); });
+        section.addView(edgeTop.root);
+        section.addView(edgeBottom.root);
+        section.addView(edgeStrength.root);
+        edgeShape = OledUi.button(activity, "");
+        edgeShape.setOnClickListener(v -> {
+            Settings.OLED_VIDEO_EDGE_SHAPE.save((Settings.OLED_VIDEO_EDGE_SHAPE.get() + 1) % EDGE_SHAPES.length);
+            syncEdges();
+            OledOverlays.refresh();
+        });
+        section.addView(edgeShape, new LinearLayout.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        LinearLayout colorRow = OledUi.row(activity);
+        colorRow.addView(OledUi.text(activity, L10n.t(activity, "Colour (hex)"), 13f, OledUi.TEXT), OledUi.weight(activity, 1f));
+        edgeColor = new EditText(activity);
+        edgeColor.setSingleLine(true);
+        edgeColor.setTextColor(OledUi.TEXT);
+        edgeColor.setTextSize(13f);
+        edgeColor.setGravity(Gravity.CENTER);
+        edgeColor.setBackground(OledUi.rounded(activity, OledUi.CARD, 8));
+        edgeColor.setImeOptions(android.view.inputmethod.EditorInfo.IME_ACTION_DONE);
+        edgeColor.setOnEditorActionListener((view, action, event) -> {
+            commitEdgeColor();
+            return false;
+        });
+        edgeColor.setOnFocusChangeListener((view, focused) -> {
+            if (!focused) commitEdgeColor();
+        });
+        colorRow.addView(edgeColor, new LinearLayout.LayoutParams(OledUi.dp(activity, 96), ViewGroup.LayoutParams.WRAP_CONTENT));
+        section.addView(colorRow);
+        SECTIONS.add(section);
+        return section;
+    }
+
+    private static void commitEdgeColor() {
+        String text = edgeColor.getText().toString().trim().replace("#", "");
+        if (text.matches("[0-9a-fA-F]{6}")) {
+            Settings.OLED_VIDEO_EDGE_COLOR.save(text.toUpperCase(Locale.ROOT));
+            OledOverlays.refresh();
+        } else {
+            edgeColor.setText(Settings.OLED_VIDEO_EDGE_COLOR.get());
+        }
+    }
+
+    private static void syncPresetVersion() {
+        Activity activity = window.get();
+        if (activity == null || presetVersion == null) return;
+        presetVersion.setText(L10n.t(activity, presetSoft ? "Soft edge" : "Sharp edge"));
+    }
+
+    private static void syncEdges() {
+        Activity activity = window.get();
+        if (activity == null || edgeTop == null) return;
+        edgeTop.set(Settings.OLED_VIDEO_EDGE_TOP.get());
+        edgeBottom.set(Settings.OLED_VIDEO_EDGE_BOTTOM.get());
+        edgeStrength.set(Settings.OLED_VIDEO_EDGE_STRENGTH.get());
+        edgeShape.setText(L10n.t(activity, "Shape") + ": "
+                + L10n.t(activity, EDGE_SHAPES[Settings.OLED_VIDEO_EDGE_SHAPE.get() % EDGE_SHAPES.length]));
+        if (!edgeColor.hasFocus()) edgeColor.setText(Settings.OLED_VIDEO_EDGE_COLOR.get());
+    }
+
+    private static void syncElement() {
+        Activity activity = window.get();
+        OledElements.Element element = OledElements.byKey(elementKey);
+        if (activity == null || element == null || elementSwitch == null) return;
+        String name = L10n.t(activity, element.label);
+        if (OledElements.statusOf(elementKey) == 0) name += " (" + L10n.t(activity, "not found") + ")";
+        elementName.setText(name);
+        presetElementName.setText(name);
+        syncing = true;
+        try {
+            elementSwitch.setChecked(OledElementSettings.isOn(elementKey));
+            elementSlider.set(OledElementSettings.transparency(elementKey));
+            elementSlider.setEnabled(OledElementSettings.isOn(elementKey));
+        } finally {
+            syncing = false;
+        }
+    }
+
+    /** The frame the layer draws around the chosen element on the Elements tab, or null. */
+    static int[] highlight(Activity activity, FrameLayout frame) {
+        if (!open || tab != TAB_ELEMENTS || minimized) return null;
+        OledElements.Element element = OledElements.byKey(elementKey);
+        if (element == null) return null;
+        int[] bounds = OledElements.boundsOf(activity, element, frame);
+        OledElements.note(element.key, bounds != null);
+        return bounds;
+    }
+
+    static boolean minimized() {
+        return open && minimized;
+    }
+
+    private static void setMinimized(boolean value) {
+        minimized = value;
+        View panel = panelRef.get();
+        View bubble = bubbleRef.get();
+        if (panel != null) panel.setVisibility(value ? View.GONE : View.VISIBLE);
+        if (bubble != null) bubble.setVisibility(value ? View.VISIBLE : View.GONE);
+        OledOverlays.quick();
+    }
+
+    /** The small round button the editor shrinks to: it can be dragged, and a tap opens the editor again. */
+    private static View buildBubble(Activity activity) {
+        TextView bubble = OledUi.text(activity, "\u2630", 20f, 0xFF001414);
+        bubble.setGravity(Gravity.CENTER);
+        bubble.setBackground(OledUi.rounded(activity, OledUi.ACCENT, 24));
+        bubble.setElevation(OledUi.dp(activity, 6));
+        final float slop = OledUi.dp(activity, 8);
+        bubble.setOnTouchListener(new View.OnTouchListener() {
+            private float startX;
+            private float startY;
+            private float startTx;
+            private float startTy;
+            private boolean moved;
+
+            @Override
+            public boolean onTouch(View view, MotionEvent event) {
+                switch (event.getActionMasked()) {
+                    case MotionEvent.ACTION_DOWN:
+                        startX = event.getRawX();
+                        startY = event.getRawY();
+                        startTx = view.getTranslationX();
+                        startTy = view.getTranslationY();
+                        moved = false;
+                        return true;
+                    case MotionEvent.ACTION_MOVE:
+                        if (Math.abs(event.getRawX() - startX) > slop || Math.abs(event.getRawY() - startY) > slop) moved = true;
+                        if (moved) {
+                            view.setTranslationX(startTx + event.getRawX() - startX);
+                            view.setTranslationY(startTy + event.getRawY() - startY);
+                        }
+                        return true;
+                    case MotionEvent.ACTION_UP:
+                        if (!moved) setMinimized(false);
+                        return true;
+                    default:
+                        return true;
+                }
+            }
+        });
+        return bubble;
+    }
+
+    /** A tap on the feed on the Elements tab chooses the smallest real element under the finger. */
+    private static void pickElementAt(float x, float y) {
+        Activity activity = window.get();
+        FrameLayout frame = frameRef.get();
+        if (activity == null || frame == null) return;
+        String best = null;
+        long bestArea = Long.MAX_VALUE;
+        for (OledElements.Element element : OledElements.all()) {
+            int[] bounds = OledElements.boundsOf(activity, element, frame);
+            if (bounds == null || x < bounds[0] || x > bounds[0] + bounds[2] || y < bounds[1] || y > bounds[1] + bounds[3]) continue;
+            long area = (long) bounds[2] * bounds[3];
+            if (area < bestArea) {
+                bestArea = area;
+                best = element.key;
+            }
+        }
+        if (best != null) {
+            elementKey = best;
+            syncElement();
+            OledOverlays.quick();
         }
     }
 
@@ -547,6 +885,9 @@ final class OledOverlayEditor {
             } else {
                 gradientButton.setText(L10n.t(activity, "Gradient"));
             }
+            syncElement();
+            syncEdges();
+            syncPresetVersion();
             for (int index = 0; index < PAGE_BOXES.size(); index++) {
                 CheckBox box = PAGE_BOXES.get(index);
                 box.setEnabled(has);
@@ -563,6 +904,7 @@ final class OledOverlayEditor {
         switch (event.getActionMasked()) {
             case MotionEvent.ACTION_DOWN: {
                 dragging = false;
+                if (tab == TAB_ELEMENTS) return true;
                 List<OledOverlay> drawn = OledOverlays.resolved();
                 for (int index = drawn.size() - 1; index >= 0; index--) {
                     OledOverlay hit = drawn.get(index);
@@ -593,6 +935,10 @@ final class OledOverlayEditor {
                 OledOverlays.quick();
                 return true;
             }
+            case MotionEvent.ACTION_UP:
+                if (tab == TAB_ELEMENTS) pickElementAt(event.getX(), event.getY());
+                dragging = false;
+                return true;
             default:
                 dragging = false;
                 return true;

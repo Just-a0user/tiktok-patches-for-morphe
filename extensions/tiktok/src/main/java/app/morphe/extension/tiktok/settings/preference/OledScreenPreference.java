@@ -8,10 +8,10 @@ import android.content.Context;
 import android.preference.Preference;
 import android.view.View;
 
-import app.morphe.extension.tiktok.feed.OledSettingsDialogs;
+import app.morphe.extension.tiktok.feed.OledOverlays;
 import app.morphe.extension.tiktok.settings.L10n;
 
-/** The row that opens the menu for single elements, presets, the picture and the video edges. */
+/** The row that opens the editor on its Elements tab: single elements, presets and the video edges. */
 @SuppressWarnings("deprecation")
 public final class OledScreenPreference extends Preference
         implements app.morphe.extension.shared.settings.preference.ImmediateAction {
@@ -21,10 +21,10 @@ public final class OledScreenPreference extends Preference
         super(context);
         setKey("action_oled_screen_elements");
         setTitle("OLED screen elements");
-        setSummary("Dim single elements of the feed screen, ready-made panels, a picture to tap an element in, "
-                + "and soft edges for the video.");
+        setSummary("Opens over the feed: dim single elements by tapping them, add ready-made panels, and set the soft "
+                + "edges of the video.");
         setOnPreferenceClickListener(preference -> {
-            OledSettingsDialogs.showMenu(context);
+            OledOverlays.openEditorAt(context, 3);
             return true;
         });
     }
