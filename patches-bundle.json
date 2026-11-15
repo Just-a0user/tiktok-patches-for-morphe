@@ -1,7 +1,7 @@
 {
-  "created_at": "2026-11-15T21:53:07",
-  "description": "# [0.12.0](https://github.com/Just-a0user/tiktok-patches-for-morphe/compare/v0.11.0...v0.12.0) (2026-11-15)\n\n\n### Features\n\n* OLED element dimming, presets, picture picker, video edges, new overlay editor ([891a622](https://github.com/Just-a0user/tiktok-patches-for-morphe/commit/891a622b77f5cfd45e19d35888000edfa225ac17))\n\n\n\n\n\n## 0.12.0",
-  "download_url": "https://github.com/Just-a0user/tiktok-patches-for-morphe/releases/download/v0.12.0/patches-0.12.0.mpp",
+  "created_at": "2026-11-15T22:46:39",
+  "description": "# [0.13.0](https://github.com/Just-a0user/tiktok-patches-for-morphe/compare/v0.12.0...v0.13.0) (2026-11-15)\n\n\n### Features\n\n* minimize editor to a bubble, element dimming/presets/edges tabs on the real feed, fully adjustable video edges ([359a339](https://github.com/Just-a0user/tiktok-patches-for-morphe/commit/359a3399f185c0ffbe73ef730769bec1bb637f6f))\n\n\n\n\n\n## 0.13.0",
+  "download_url": "https://github.com/Just-a0user/tiktok-patches-for-morphe/releases/download/v0.13.0/patches-0.13.0.mpp",
   "signature_download_url": "",
-  "version": "0.12.0"
+  "version": "0.13.0"
 }
