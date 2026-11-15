@@ -1,3 +1,16 @@
+# [0.13.0](https://github.com/Just-a0user/tiktok-patches-for-morphe/compare/v0.12.0...v0.13.0) (2026-11-15)
+
+
+### Features
+
+* minimize editor to a bubble, element dimming/presets/edges tabs on the real feed, fully adjustable video edges ([359a339](https://github.com/Just-a0user/tiktok-patches-for-morphe/commit/359a3399f185c0ffbe73ef730769bec1bb637f6f))
+
+
+
+
+
+## 0.13.0
+
 # [0.12.0](https://github.com/Just-a0user/tiktok-patches-for-morphe/compare/v0.11.0...v0.12.0) (2026-11-15)
 
 
