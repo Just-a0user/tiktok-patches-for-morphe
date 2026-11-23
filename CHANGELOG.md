@@ -1,3 +1,16 @@
+## [0.13.3](https://github.com/Just-a0user/tiktok-patches-for-morphe/compare/v0.13.2...v0.13.3) (2026-11-23)
+
+
+### Bug Fixes
+
+* video edges fade at the edges of the picture, not of the view around it ([63f109f](https://github.com/Just-a0user/tiktok-patches-for-morphe/commit/63f109fd1704c749489995b92101d7993fd655d8))
+
+
+
+
+
+## 0.13.3
+
 ## [0.13.2](https://github.com/Just-a0user/tiktok-patches-for-morphe/compare/v0.13.1...v0.13.2) (2026-11-23)
 
 
