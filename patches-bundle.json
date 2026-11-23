@@ -1,7 +1,7 @@
 {
-  "created_at": "2026-11-23T23:25:13",
-  "description": "## [0.13.3](https://github.com/Just-a0user/tiktok-patches-for-morphe/compare/v0.13.2...v0.13.3) (2026-11-23)\n\n\n### Bug Fixes\n\n* video edges fade at the edges of the picture, not of the view around it ([63f109f](https://github.com/Just-a0user/tiktok-patches-for-morphe/commit/63f109fd1704c749489995b92101d7993fd655d8))\n\n\n\n\n\n## 0.13.3",
-  "download_url": "https://github.com/Just-a0user/tiktok-patches-for-morphe/releases/download/v0.13.3/patches-0.13.3.mpp",
+  "created_at": "2026-11-23T23:49:37",
+  "description": "# [0.14.0](https://github.com/Just-a0user/tiktok-patches-for-morphe/compare/v0.13.3...v0.14.0) (2026-11-23)\n\n\n### Features\n\n* video edges can be moved in and out, to cover the seam at the picture's edge ([70e935a](https://github.com/Just-a0user/tiktok-patches-for-morphe/commit/70e935acbf7197b4c8cbebac55f87eff3ba63167))\n\n\n\n\n\n## 0.14.0",
+  "download_url": "https://github.com/Just-a0user/tiktok-patches-for-morphe/releases/download/v0.14.0/patches-0.14.0.mpp",
   "signature_download_url": "",
-  "version": "0.13.3"
+  "version": "0.14.0"
 }

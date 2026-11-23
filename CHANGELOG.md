@@ -1,3 +1,16 @@
+# [0.14.0](https://github.com/Just-a0user/tiktok-patches-for-morphe/compare/v0.13.3...v0.14.0) (2026-11-23)
+
+
+### Features
+
+* video edges can be moved in and out, to cover the seam at the picture's edge ([70e935a](https://github.com/Just-a0user/tiktok-patches-for-morphe/commit/70e935acbf7197b4c8cbebac55f87eff3ba63167))
+
+
+
+
+
+## 0.14.0
+
 ## [0.13.3](https://github.com/Just-a0user/tiktok-patches-for-morphe/compare/v0.13.2...v0.13.3) (2026-11-23)
 
 
