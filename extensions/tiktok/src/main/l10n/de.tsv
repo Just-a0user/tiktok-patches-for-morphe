@@ -2302,3 +2302,7 @@ Straight	Gerade
 Strength	Stärke
 Tap an element on the feed, or pick it with the arrows. Changes here are kept at once.	Tippe ein Element auf dem Feed an oder wähle es mit den Pfeilen. Änderungen hier werden sofort gespeichert.
 The video fades at its top and bottom edge. This is drawn on the video itself, not as a panel, and only in the feed. Kept at once.	Das Video blendet am oberen und unteren Rand aus. Das wird auf das Video selbst gezeichnet, nicht als Feld, und nur im Feed. Wird sofort gespeichert.
+All sides	Alle Seiten
+Left and right	Links und rechts
+Soft edge on	Weicher Rand an
+Top and bottom	Oben und unten

@@ -93,6 +93,7 @@ final class OledOverlayEditor {
     private static TextView followInfo;
     private static Button stopFollowing;
     private static Button gradientButton;
+    private static Button softAxisButton;
     private static final List<Button> TAB_BUTTONS = new ArrayList<>();
     private static final List<View> SECTIONS = new ArrayList<>();
     private static final List<CheckBox> PAGE_BOXES = new ArrayList<>();
@@ -392,6 +393,10 @@ final class OledOverlayEditor {
         section.addView(roundingSlider.root);
         section.addView(opacitySlider.root);
         section.addView(softSlider.root);
+        softAxisButton = OledUi.button(activity, "");
+        softAxisButton.setOnClickListener(v -> edit(o -> o.softAxis = (o.softAxis + 1) % 3));
+        section.addView(softAxisButton, new LinearLayout.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         SECTIONS.add(section);
         return section;
     }
@@ -860,6 +865,7 @@ final class OledOverlayEditor {
             followInfo.setVisibility(follows ? View.VISIBLE : View.GONE);
             stopFollowing.setVisibility(follows ? View.VISIBLE : View.GONE);
             gradientButton.setEnabled(has);
+            softAxisButton.setEnabled(has);
             if (has) {
                 if (follows) {
                     OledElements.Element element = OledElements.byKey(overlay.follow);
@@ -872,6 +878,9 @@ final class OledOverlayEditor {
                 roundingSlider.set(overlay.rounding);
                 opacitySlider.set(overlay.alpha);
                 softSlider.set(overlay.softEdgeDp);
+                softAxisButton.setText(L10n.t(activity, "Soft edge on") + ": " + L10n.t(activity,
+                        overlay.softAxis == OledOverlay.AXIS_HORIZONTAL ? "Left and right"
+                                : overlay.softAxis == OledOverlay.AXIS_VERTICAL ? "Top and bottom" : "All sides"));
                 graySlider.set(overlay.gray);
                 graySlider.setName(L10n.t(activity, "Gray at the end") + String.format(Locale.ROOT,
                         " #%02X%02X%02X", overlay.gray, overlay.gray, overlay.gray));

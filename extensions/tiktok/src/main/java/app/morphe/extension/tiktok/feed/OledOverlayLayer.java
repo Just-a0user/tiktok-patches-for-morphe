@@ -9,6 +9,8 @@ import android.graphics.Bitmap;
 import android.graphics.BlurMaskFilter;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.ColorMatrix;
+import android.graphics.ColorMatrixColorFilter;
 import android.graphics.LinearGradient;
 import android.graphics.Matrix;
 import android.graphics.Paint;
@@ -36,7 +38,10 @@ final class OledOverlayLayer extends View {
     private static final class Rendered {
         String signature;
         Bitmap bitmap;
-        int pad;
+        int padX;
+        int padY;
+        /** How much to scale the alpha by: a thin panel with a wide blur never gets fully dark otherwise. */
+        float boost = 1f;
     }
 
     private final Map<Long, Rendered> rendered = new HashMap<>();
@@ -103,7 +108,9 @@ final class OledOverlayLayer extends View {
             if (!shown || overlay.alpha == 0 && !editing) continue;
             Rendered drawn = renderedFor(overlay);
             if (drawn.bitmap != null) {
-                canvas.drawBitmap(drawn.bitmap, overlay.x - drawn.pad, overlay.y - drawn.pad, bitmapPaint);
+                bitmapPaint.setColorFilter(drawn.boost > 1.02f ? new ColorMatrixColorFilter(new ColorMatrix(new float[] {
+                        1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, drawn.boost, 0})) : null);
+                canvas.drawBitmap(drawn.bitmap, overlay.x - drawn.padX, overlay.y - drawn.padY, bitmapPaint);
                 if (overlay.animates()) {
                     moving = true;
                     slowest = Math.max(slowest, (long) overlay.width * overlay.height);
@@ -153,9 +160,31 @@ final class OledOverlayLayer extends View {
             drawn.bitmap = null;
         }
         drawn.signature = wanted;
-        drawn.pad = Math.round(overlay.softEdgeDp * density);
-        drawn.bitmap = render(overlay, drawn.pad, step / (float) PHASE_STEPS);
+        float radius = overlay.softEdgeDp * density;
+        // The blur reaches about three of its sigmas out; the bitmap has room for all of it, so the
+        // fade ends in nothing instead of being cut off in a step at the bitmap's edge.
+        int pad = radius > 0f ? Math.round(2f * radius + 2f) : 0;
+        boolean softX = radius > 0f && overlay.softAxis != OledOverlay.AXIS_VERTICAL;
+        boolean softY = radius > 0f && overlay.softAxis != OledOverlay.AXIS_HORIZONTAL;
+        drawn.padX = softX ? pad : 0;
+        drawn.padY = softY ? pad : 0;
+        drawn.boost = 1f;
+        if (radius > 0f) {
+            // A panel thinner than its blur would stay pale; the centre is brought back to full.
+            float sigma = 0.57735f * radius + 0.5f;
+            float peak = (softX ? erf(overlay.width / (2f * sigma * 1.41421f)) : 1f)
+                    * (softY ? erf(overlay.height / (2f * sigma * 1.41421f)) : 1f);
+            drawn.boost = 1f / Math.max(peak, 0.25f);
+        }
+        drawn.bitmap = render(overlay, drawn.padX, drawn.padY, radius, step / (float) PHASE_STEPS);
         return drawn;
+    }
+
+    private static float erf(float x) {
+        float t = 1f / (1f + 0.3275911f * Math.abs(x));
+        float y = 1f - (((((1.061405429f * t - 1.453152027f) * t) + 1.421413741f) * t - 0.284496736f) * t
+                + 0.254829592f) * t * (float) Math.exp(-x * x);
+        return x >= 0f ? y : -y;
     }
 
     /** Where in its round an animated gradient is now, as a step of {@link #PHASE_STEPS}; 0 for a still one. */
@@ -165,43 +194,41 @@ final class OledOverlayLayer extends View {
         return (int) ((SystemClock.uptimeMillis() % period) * PHASE_STEPS / period);
     }
 
-    /** The panel as a bitmap with {@code pad} pixels around it for its soft edge, or null if it can't be made. */
-    static Bitmap render(OledOverlay overlay, int pad, float phase) {
-        int width = overlay.width + 2 * pad;
-        int height = overlay.height + 2 * pad;
+    /**
+     * The panel as a bitmap with room around it for its soft edge on the soft sides, or null if it can't
+     * be made. A gradient always runs over the whole width; an animated one only swings its gray between
+     * black and the set gray.
+     */
+    static Bitmap render(OledOverlay overlay, int padX, int padY, float blur, float phase) {
+        int width = overlay.width + 2 * padX;
+        int height = overlay.height + 2 * padY;
         if (width <= 0 || height <= 0 || (long) width * height > 40_000_000L) return null;
         try {
             Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
             Canvas canvas = new Canvas(bitmap);
             Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+            paint.setDither(true);
             paint.setStyle(Paint.Style.FILL);
             int black = Color.BLACK;
-            // An animated gradient moves along the panel and swings its gray between black and the set
-            // gray; a still one keeps the set gray and stays where it is.
-            boolean moving = overlay.animates();
-            float swing = moving ? 0.5f - 0.5f * (float) Math.cos(2.0 * Math.PI * phase) : 1f;
+            float swing = overlay.animates() ? 0.5f - 0.5f * (float) Math.cos(2.0 * Math.PI * phase) : 1f;
             int level = Math.round(overlay.gray * swing);
             int gray = Color.rgb(level, level, level);
-            float left = pad;
-            float top = pad;
-            float right = pad + overlay.width;
-            float bottom = pad + overlay.height;
+            float left = padX;
+            float top = padY;
+            float right = padX + overlay.width;
+            float bottom = padY + overlay.height;
             float centerX = (left + right) / 2f;
             float centerY = (top + bottom) / 2f;
-            float shift = moving ? 2f * overlay.width * phase : 0f;
             switch (overlay.gradient) {
                 case OledOverlay.GRADIENT_LEFT_TO_RIGHT:
-                    paint.setShader(new LinearGradient(left + shift, 0, right + shift, 0, black, gray,
-                            Shader.TileMode.MIRROR));
+                    paint.setShader(new LinearGradient(left, 0, right, 0, black, gray, Shader.TileMode.CLAMP));
                     break;
                 case OledOverlay.GRADIENT_RIGHT_TO_LEFT:
-                    paint.setShader(new LinearGradient(right - shift, 0, left - shift, 0, black, gray,
-                            Shader.TileMode.MIRROR));
+                    paint.setShader(new LinearGradient(right, 0, left, 0, black, gray, Shader.TileMode.CLAMP));
                     break;
                 case OledOverlay.GRADIENT_CENTER_OUT: {
-                    float reach = Math.max(1f, overlay.width / 2f) * (moving ? 0.6f + 0.8f * swing : 1f);
-                    RadialGradient radial = new RadialGradient(centerX, centerY, reach, black, gray,
-                            Shader.TileMode.MIRROR);
+                    RadialGradient radial = new RadialGradient(centerX, centerY, Math.max(1f, overlay.width / 2f),
+                            black, gray, Shader.TileMode.CLAMP);
                     Matrix squash = new Matrix();
                     squash.setScale(1f, overlay.height / (float) Math.max(1, overlay.width), centerX, centerY);
                     radial.setLocalMatrix(squash);
@@ -212,9 +239,15 @@ final class OledOverlayLayer extends View {
                     paint.setColor(black);
             }
             paint.setAlpha(Math.round(255f * overlay.alpha / 100f));
-            if (pad > 0) paint.setMaskFilter(new BlurMaskFilter(pad, BlurMaskFilter.Blur.NORMAL));
+            if (blur > 0f) paint.setMaskFilter(new BlurMaskFilter(blur, BlurMaskFilter.Blur.NORMAL));
+            // On a side that is not soft the shape runs on past the bitmap, so the blur does not fade it there.
+            float reach = blur > 0f ? 3f * blur + 4f : 0f;
+            float shapeLeft = padX == 0 && blur > 0f ? left - reach : left;
+            float shapeRight = padX == 0 && blur > 0f ? right + reach : right;
+            float shapeTop = padY == 0 && blur > 0f ? top - reach : top;
+            float shapeBottom = padY == 0 && blur > 0f ? bottom + reach : bottom;
             float radius = Math.min(overlay.rounding, Math.min(overlay.width, overlay.height) / 2f);
-            canvas.drawRoundRect(new RectF(left, top, right, bottom), radius, radius, paint);
+            canvas.drawRoundRect(new RectF(shapeLeft, shapeTop, shapeRight, shapeBottom), radius, radius, paint);
             return bitmap;
         } catch (OutOfMemoryError ex) {
             return null;

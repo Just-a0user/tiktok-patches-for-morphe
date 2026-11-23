@@ -28,6 +28,11 @@ final class OledOverlay {
     static final int PAGE_FRIENDS = 8;
     static final int ALL_PAGES = PAGE_HOME | PAGE_PROFILE | PAGE_INBOX | PAGE_FRIENDS;
 
+    /** Which edges of a panel are soft: all of them, the left and right ones, or the top and bottom ones. */
+    static final int AXIS_BOTH = 0;
+    static final int AXIS_HORIZONTAL = 1;
+    static final int AXIS_VERTICAL = 2;
+
     static final int MAX_SIZE_PX = 4000;
     static final int MAX_ROUNDING_PX = 2000;
     static final int MAX_SOFT_EDGE_DP = 100;
@@ -46,6 +51,8 @@ final class OledOverlay {
     /** How far its edge fades out, in dp. 0 is a sharp edge. */
     int softEdgeDp = 0;
     String gradient = GRADIENT_OFF;
+    /** Which edges the soft edge applies to, one of the AXIS_ values. */
+    int softAxis = AXIS_BOTH;
     /**
      * The gray the gradient ends at, 0 to 255, as the value of each of red, green and blue: 6 is
      * #060606. The panel starts at black, so the smaller this is the less the panel changes.
@@ -77,6 +84,7 @@ final class OledOverlay {
         other.alpha = alpha;
         other.softEdgeDp = softEdgeDp;
         other.gradient = gradient;
+        other.softAxis = softAxis;
         other.gray = gray;
         other.pages = pages;
         other.animSeconds = animSeconds;
@@ -88,7 +96,7 @@ final class OledOverlay {
     /** Everything that changes how it is drawn, as one string, so an unchanged panel is not redrawn. */
     String drawSignature() {
         return width + "x" + height + "r" + rounding + "a" + alpha + "s" + softEdgeDp
-                + gradient + gray + "m" + animSeconds;
+                + gradient + gray + "m" + animSeconds + "z" + softAxis;
     }
 
     /** Whether the gradient is in motion. */
@@ -117,6 +125,7 @@ final class OledOverlay {
         gray = within(gray, 0, MAX_GRAY);
         animSeconds = within(animSeconds, 0, 86_400);
         padding = within(padding, 0, 200);
+        softAxis = within(softAxis, AXIS_BOTH, AXIS_VERTICAL);
         if (follow == null) follow = "";
         pages &= ALL_PAGES;
         if (!GRADIENT_LEFT_TO_RIGHT.equals(gradient) && !GRADIENT_RIGHT_TO_LEFT.equals(gradient)
@@ -145,6 +154,7 @@ final class OledOverlay {
         json.put("m", animSeconds);
         json.put("f", follow);
         json.put("d", padding);
+        json.put("z", softAxis);
         return json;
     }
 
@@ -164,6 +174,7 @@ final class OledOverlay {
         overlay.animSeconds = json.optInt("m", overlay.animSeconds);
         overlay.follow = json.optString("f", "");
         overlay.padding = json.optInt("d", overlay.padding);
+        overlay.softAxis = json.optInt("z", AXIS_BOTH);
         overlay.clamp();
         return overlay;
     }
