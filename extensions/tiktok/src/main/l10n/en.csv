@@ -307,6 +307,7 @@ Blocking,Blocking
 Bottom bar,Bottom bar
 "Bottom bar, all together","Bottom bar, all together"
 Bottom edge,Bottom edge
+Bottom edge position,Bottom edge position
 Bottom left,Bottom left
 Bottom tabs to keep,Bottom tabs to keep
 Brightness,Brightness
@@ -2088,6 +2089,7 @@ Too many media saves are already running. Try again in a moment.,Too many media 
 Top and bottom,Top and bottom
 Top bar,Top bar
 Top edge,Top edge
+Top edge position,Top edge position
 Tracking,Tracking
 "Tracking, device access and links","Tracking, device access and links"
 Translate button in comments,Translate button in comments

@@ -139,7 +139,7 @@ final class OledUi {
             label = text(context, name, 13f, TEXT);
             top.addView(label, weight(context, 1f));
             box = new EditText(context);
-            box.setInputType(InputType.TYPE_CLASS_NUMBER);
+            box.setInputType(min < 0 ? InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_SIGNED : InputType.TYPE_CLASS_NUMBER);
             box.setSingleLine(true);
             box.setImeOptions(EditorInfo.IME_ACTION_DONE);
             box.setTextColor(TEXT);

@@ -74,6 +74,8 @@ final class OledOverlayEditor {
     private static OledUi.NumberSlider edgeTop;
     private static OledUi.NumberSlider edgeBottom;
     private static OledUi.NumberSlider edgeStrength;
+    private static OledUi.NumberSlider edgeTopShift;
+    private static OledUi.NumberSlider edgeBottomShift;
     private static Button edgeShape;
     private static Button presetVersion;
     private static EditText edgeColor;
@@ -581,8 +583,14 @@ final class OledOverlayEditor {
                 value -> { Settings.OLED_VIDEO_EDGE_BOTTOM.save(value); OledOverlays.refresh(); });
         edgeStrength = new OledUi.NumberSlider(activity, L10n.t(activity, "Strength"), "%", 0, 100, 100,
                 value -> { Settings.OLED_VIDEO_EDGE_STRENGTH.save(value); OledOverlays.refresh(); });
+        edgeTopShift = new OledUi.NumberSlider(activity, L10n.t(activity, "Top edge position"), "px", -150, 150, 150,
+                value -> { Settings.OLED_VIDEO_EDGE_TOP_OFFSET.save(value); OledOverlays.refresh(); });
+        edgeBottomShift = new OledUi.NumberSlider(activity, L10n.t(activity, "Bottom edge position"), "px", -150, 150, 150,
+                value -> { Settings.OLED_VIDEO_EDGE_BOTTOM_OFFSET.save(value); OledOverlays.refresh(); });
         section.addView(edgeTop.root);
+        section.addView(edgeTopShift.root);
         section.addView(edgeBottom.root);
+        section.addView(edgeBottomShift.root);
         section.addView(edgeStrength.root);
         edgeShape = OledUi.button(activity, "");
         edgeShape.setOnClickListener(v -> {
@@ -635,6 +643,8 @@ final class OledOverlayEditor {
         if (activity == null || edgeTop == null) return;
         edgeTop.set(Settings.OLED_VIDEO_EDGE_TOP.get());
         edgeBottom.set(Settings.OLED_VIDEO_EDGE_BOTTOM.get());
+        edgeTopShift.set(Settings.OLED_VIDEO_EDGE_TOP_OFFSET.get());
+        edgeBottomShift.set(Settings.OLED_VIDEO_EDGE_BOTTOM_OFFSET.get());
         edgeStrength.set(Settings.OLED_VIDEO_EDGE_STRENGTH.get());
         edgeShape.setText(L10n.t(activity, "Shape") + ": "
                 + L10n.t(activity, EDGE_SHAPES[Settings.OLED_VIDEO_EDGE_SHAPE.get() % EDGE_SHAPES.length]));

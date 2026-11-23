@@ -46,6 +46,8 @@ final class OledVideoEdges {
             int top = on ? Settings.OLED_VIDEO_EDGE_TOP.get() : 0;
             int bottom = on ? Settings.OLED_VIDEO_EDGE_BOTTOM.get() : 0;
             int shape = Settings.OLED_VIDEO_EDGE_SHAPE.get();
+            int topShift = Settings.OLED_VIDEO_EDGE_TOP_OFFSET.get();
+            int bottomShift = Settings.OLED_VIDEO_EDGE_BOTTOM_OFFSET.get();
             int rgb = parseColor(Settings.OLED_VIDEO_EDGE_COLOR.get());
             if (top <= 0 && bottom <= 0 && PUT.isEmpty()) return;
             for (View player : VideoOverlayHider.viewsNamed(activity, PLAYER_VIEW)) {
@@ -58,10 +60,10 @@ final class OledVideoEdges {
                 Drawable current = player.getForeground();
                 if (current != null && current != ours) continue;
                 if (ours instanceof EdgeDrawable) {
-                    ((EdgeDrawable) ours).set(top, bottom, strength, shape, rgb);
+                    ((EdgeDrawable) ours).set(top, bottom, strength, shape, rgb, topShift, bottomShift);
                 } else {
                     EdgeDrawable edge = new EdgeDrawable(player);
-                    edge.set(top, bottom, strength, shape, rgb);
+                    edge.set(top, bottom, strength, shape, rgb, topShift, bottomShift);
                     player.setForeground(edge);
                     PUT.put(player, edge);
                 }
@@ -104,6 +106,9 @@ final class OledVideoEdges {
         private int strength = -1;
         private int shape = -1;
         private int rgb = -1;
+        private int topShift;
+        private int bottomShift;
+        private final android.graphics.Paint solid = new android.graphics.Paint();
 
         EdgeDrawable(View playerView) {
             player = new WeakReference<>(playerView);
@@ -131,8 +136,12 @@ final class OledVideoEdges {
             return null;
         }
 
-        void set(int topPx, int bottomPx, int newStrength, int newShape, int newRgb) {
-            if (topPx == top && bottomPx == bottom && newStrength == strength && newShape == shape && newRgb == rgb) return;
+        void set(int topPx, int bottomPx, int newStrength, int newShape, int newRgb, int newTopShift, int newBottomShift) {
+            if (topPx == top && bottomPx == bottom && newStrength == strength && newShape == shape && newRgb == rgb
+                    && newTopShift == topShift && newBottomShift == bottomShift) return;
+            topShift = newTopShift;
+            bottomShift = newBottomShift;
+            solid.setColor((Math.round(255f * newStrength / 100f) << 24) | newRgb);
             top = topPx;
             bottom = bottomPx;
             strength = newStrength;
@@ -165,12 +174,17 @@ final class OledVideoEdges {
                 lower = Math.min(lower, at[1] - base[1] + video.getHeight());
             }
             if (right <= left || lower <= upper) return;
+            // The edges can be moved: inwards they leave a solid band up to the fade, outwards they reach past the picture.
+            int fadeTop = upper + topShift;
+            int fadeBottom = lower - bottomShift;
             if (top > 0) {
-                topFade.setBounds(left, upper, right, Math.min(upper + top, lower));
+                if (topShift > 0) canvas.drawRect(left, upper, right, Math.min(fadeTop, lower), solid);
+                topFade.setBounds(left, fadeTop, right, Math.min(fadeTop + top, lower));
                 topFade.draw(canvas);
             }
             if (bottom > 0) {
-                bottomFade.setBounds(left, Math.max(upper, lower - bottom), right, lower);
+                if (bottomShift > 0) canvas.drawRect(left, Math.max(fadeBottom, upper), right, lower, solid);
+                bottomFade.setBounds(left, Math.max(fadeBottom - bottom, upper), right, fadeBottom);
                 bottomFade.draw(canvas);
             }
         }
