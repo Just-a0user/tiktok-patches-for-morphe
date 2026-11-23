@@ -1,3 +1,16 @@
+## [0.13.2](https://github.com/Just-a0user/tiktok-patches-for-morphe/compare/v0.13.1...v0.13.2) (2026-11-23)
+
+
+### Bug Fixes
+
+* soft edges fade out fully, per-panel soft edge sides, gradient spans the whole panel ([f3955b7](https://github.com/Just-a0user/tiktok-patches-for-morphe/commit/f3955b7ae5d79ae547fec4b995a2ec6717fcffdc))
+
+
+
+
+
+## 0.13.2
+
 ## [0.13.1](https://github.com/Just-a0user/tiktok-patches-for-morphe/compare/v0.13.0...v0.13.1) (2026-11-15)
 
 
